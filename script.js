@@ -351,3 +351,13 @@ function copyEmailAndOpenMailto(event) {
         window.location.href = 'mailto:' + email;
     });
 }
+
+// Initialize AOS
+document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        easing: 'ease-out-cubic'
+    });
+});

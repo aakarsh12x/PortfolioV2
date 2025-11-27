@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aakarsh Singh - Full Stack Developer & AI Enthusiast</title>
     <meta name="description" content="Aakarsh Singh - Full Stack Developer, AI Enthusiast, and Student at IIIT Bhopal.">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -20,6 +25,7 @@
                 <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
                 <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -39,11 +45,15 @@
                     <h1 class="hero-title">
                         Hi, I'm <span class="highlight">Aakarsh Singh</span>
                     </h1>
-                    <p class="hero-subtitle">Full Stack Developer & AI Enthusiast</p>
+                    <div class="code-badge">
+                        <i class="fas fa-code"></i> <span>&lt;FullStackDeveloper /&gt;</span>
+                    </div>
+                    <p class="hero-subtitle">Building the future with AI & Web Tech</p>
                     <p class="hero-description">
-                        Information Technology student at IIIT Bhopal, passionate about building innovative web applications and exploring artificial intelligence.
+                        Information Technology student at IIIT Bhopal, passionate about building innovative web
+                        applications and exploring artificial intelligence.
                     </p>
-                    
+
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">View Projects</a>
                         <a href="#contact" class="btn btn-secondary">
@@ -52,32 +62,30 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="hero-image">
-                    <div class="profile-card">
-                        <img src="assets/profile.jpg" alt="Aakarsh Singh" class="profile-img">
-                        <div class="profile-info">
-                            <h3>Aakarsh Singh</h3>
-                            <p class="role">Full Stack Developer</p>
-                            <p class="location">📍 IIIT Bhopal</p>
-                            <div class="status-badge">
-                                <span class="status-dot"></span>
-                                Available for opportunities
-                            </div>
+                    <div class="hero-visual-wrapper">
+                        <div class="profile-glow-ring"></div>
+                        <img src="assets/profile.jpg" alt="Aakarsh Singh" class="hero-profile-img">
+
+                        <!-- Floating Status Badge -->
+                        <div class="floating-badge">
+                            <span class="status-dot"></span>
+                            <span>Open to Work</span>
                         </div>
-                        <div class="tech-stack">
-                            <h4>Tech Stack</h4>
-                                                    <div class="tech-grid">
-                            <div class="tech-item">React</div>
-                            <div class="tech-item">Next.js</div>
-                            <div class="tech-item">Node.js</div>
-                            <div class="tech-item">Python</div>
-                            <div class="tech-item">Java</div>
-                            <div class="tech-item">JavaScript</div>
-                            <div class="tech-item">Flutter</div>
-                            <div class="tech-item">PostgreSQL</div>
-                            <div class="tech-item">AI/ML</div>
+
+                        <!-- Floating Tech Icons -->
+                        <div class="floating-icon icon-react" title="React">
+                            <i class="fab fa-react"></i>
                         </div>
+                        <div class="floating-icon icon-node" title="Node.js">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <div class="floating-icon icon-python" title="Python">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="floating-icon icon-ai" title="AI/ML">
+                            <i class="fas fa-brain"></i>
                         </div>
                     </div>
                 </div>
@@ -91,8 +99,10 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm a passionate Information Technology student at IIIT Bhopal, deeply interested in artificial intelligence, machine learning, and full-stack web development.</p>
-                    <p>I specialize in building modern web applications using React, Node.js, and Python, with a particular focus on AI-powered solutions.</p>
+                    <p>I'm a passionate Information Technology student at IIIT Bhopal, deeply interested in artificial
+                        intelligence, machine learning, and full-stack web development.</p>
+                    <p>I specialize in building modern web applications using React, Node.js, and Python, with a
+                        particular focus on AI-powered solutions.</p>
                     <div class="about-details">
                         <div class="detail-item">
                             <i class="fas fa-graduation-cap"></i>
@@ -179,6 +189,50 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Professional Experience</h2>
+            <div class="timeline">
+                <!-- Experience Item 1 -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Oct 2025 – Present</div>
+                    <div class="timeline-content">
+                        <h3>Software Developer Intern (Remote)</h3>
+                        <h4>Aitreya Tech Solutions – Alumns (Noida)</h4>
+                        <ul>
+                            <li>Built real-time 1:1 and group chat modules using Node.js and Socket.IO with MongoDB as
+                                the primary database, currently supporting 1000+ live users.</li>
+                            <li>Developed scalable message delivery modules on Render, improving reliability and
+                                reducing latency by 35%.</li>
+                            <li>Optimized React chat interfaces by reducing re-render overhead, improving UI
+                                responsiveness by 40%.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Mar 2025 – Aug 2025</div>
+                    <div class="timeline-content">
+                        <h3>Full-Stack Developer (Remote)</h3>
+                        <h4>P´eˇce - School Management System (Wvintech Solution, Malaysia)</h4>
+                        <ul>
+                            <li>Delivered a full-stack school management system using Flutter frontend and Node.js
+                                backend, handling 15k+ student records with secure authentication via AWS Cognito.</li>
+                            <li>Engineered scalable backend with Amazon RDS, optimizing queries and indexes to achieve
+                                99% uptime and reduce average API latency by 35%.</li>
+                            <li>Implemented a serverless architecture using API Gateway and Lambda, cutting deployment
+                                time by 60% and reducing infra cost by 25%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
@@ -187,16 +241,41 @@
                 <div class="project-card">
                     <div class="project-header">
                         <div class="project-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://fastq-ichy73kkw-aakarsh12xs-projects.vercel.app/user-dashboard"
+                                target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>FastQ - Smart Queue Management System</h3>
+                        <p>A smart queue management platform managing queues across 4+ sectors. Implemented JWT auth,
+                            role control, and Socket.IO notifications, reducing wait times by 52%.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Socket.IO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://money-map-fnl.vercel.app" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/aakarsh12x/MoneyMapFnl" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://money-map-fnl.vercel.app" target="_blank" class="project-link"><i
+                                    class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/aakarsh12x/MoneyMapFnl" target="_blank" class="project-link"><i
+                                    class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
                         <h3>MoneyMap</h3>
-                        <p>A comprehensive financial management application for tracking expenses, budgeting, and financial planning with an intuitive dashboard.</p>
+                        <p>A comprehensive financial management application for tracking expenses, budgeting, and
+                            financial planning with an intuitive dashboard.</p>
                         <div class="project-tech">
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">React</span>
@@ -211,12 +290,16 @@
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/aakarsh12x/Yuno-GeoSpatial-Social-Media" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app/" target="_blank"
+                                class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/aakarsh12x/Yuno-GeoSpatial-Social-Media" target="_blank"
+                                class="project-link"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
                         <h3>Yuno</h3>
-                        <p>A modern geospatial social media platform with real-time chat, location-based discovery, interactive maps, and Socket.IO-powered communication.</p>
+                        <p>A modern geospatial social media platform with real-time chat, location-based discovery,
+                            interactive maps, and Socket.IO-powered communication.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Next.js</span>
                             <span class="tech-tag">TypeScript</span>
@@ -232,12 +315,14 @@
                             <i class="fas fa-search"></i>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/aakarsh12x/AI-Detective" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/aakarsh12x/AI-Detective" target="_blank" class="project-link"><i
+                                    class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="project-content">
                         <h3>AI Detective</h3>
-                        <p>An intelligent investigation system powered by AI algorithms for pattern recognition, data analysis, and automated investigation workflows.</p>
+                        <p>An intelligent investigation system powered by AI algorithms for pattern recognition, data
+                            analysis, and automated investigation workflows.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">AI/ML</span>
@@ -262,7 +347,8 @@
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <a href="#" onclick="copyEmailAndOpenMailto(event); return false;">singhaakarsh28@gmail.com</a>
+                                <a href="#"
+                                    onclick="copyEmailAndOpenMailto(event); return false;">singhaakarsh28@gmail.com</a>
                             </div>
                         </div>
                         <div class="contact-method">
@@ -283,7 +369,8 @@
                             <i class="fab fa-linkedin"></i>
                             <div>
                                 <h4>LinkedIn</h4>
-                                <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank">Aakarsh Singh</a>
+                                <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank">Aakarsh
+                                    Singh</a>
                             </div>
                         </div>
                     </div>
@@ -304,7 +391,8 @@
                     <h4>Connect</h4>
                     <div class="social-links">
                         <a href="https://github.com/aakarsh12x" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" onclick="copyEmailAndOpenMailto(event); return false;"><i class="fas fa-envelope"></i></a>
+                        <a href="#" onclick="copyEmailAndOpenMailto(event); return false;"><i
+                                class="fas fa-envelope"></i></a>
                         <a href="https://wa.me/918739018155" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -315,6 +403,8 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
