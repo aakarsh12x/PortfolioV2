@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomCursor } from "@/components/CustomCursor";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Experience } from "@/components/Experience";
