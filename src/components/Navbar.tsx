@@ -54,7 +54,7 @@ export const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex gap-12">
                     {["Experience", "Projects", "Skills", "Contact"].map((item) => (
-                        <a key={item} href={`#${item.toLowerCase()}`} className="text-xs text-white/40 hover:text-white transition-colors tracking-[0.2em] uppercase cursor-none">
+                        <a key={item} href={`#${item.toLowerCase()}`} className="text-xs text-white/40 hover:text-white transition-colors tracking-[0.2em] uppercase lg:cursor-none">
                             {item}
                         </a>
                     ))}
@@ -63,7 +63,7 @@ export const Navbar = () => {
                 {/* Mobile Hamburger */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-white relative z-50 p-2 -mr-2 cursor-none"
+                    className="md:hidden text-white relative z-50 p-2 -mr-2 lg:cursor-none"
                     aria-label="Toggle menu"
                 >
                     {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

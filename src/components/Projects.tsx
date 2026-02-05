@@ -30,7 +30,7 @@ export const Projects = () => {
                                 href={project.url || "#"}
                                 target={project.url ? "_blank" : "_self"}
                                 rel={project.url ? "noopener noreferrer" : ""}
-                                className="group block py-12 border-t border-white/10 hover:bg-white/[0.02] transition-colors cursor-none"
+                                className="group block py-12 border-t border-white/10 hover:bg-white/[0.02] transition-colors lg:cursor-none"
                                 style={{ cursor: project.url ? 'pointer' : 'default' }}
                             >
                                 <div className="flex flex-col lg:flex-row lg:items-baseline justify-between gap-6 mb-6">

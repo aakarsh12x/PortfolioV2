@@ -100,11 +100,11 @@ export const Hero = () => {
                             transition={{ duration: 0.5, delay: 0.4 }}
                             className="flex gap-6"
                         >
-                            <a href="#contact" className="group flex items-center gap-4 px-8 py-4 bg-[#ff4d00] text-black font-bold text-xs tracking-[0.2em] uppercase hover:bg-white transition-all cursor-none">
+                            <a href="#contact" className="group flex items-center gap-4 px-8 py-4 bg-[#ff4d00] text-black font-bold text-xs tracking-[0.2em] uppercase hover:bg-white transition-all lg:cursor-none">
                                 Contact Me
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </a>
-                            <a href="https://drive.google.com/file/d/1YkAAahT3mnxU-wAC_qXMCWBHLeLAl9g1/view?usp=sharing" target="_blank" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
+                            <a href="https://drive.google.com/file/d/1YkAAahT3mnxU-wAC_qXMCWBHLeLAl9g1/view?usp=sharing" target="_blank" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all lg:cursor-none">
                                 Resume
                             </a>
                         </motion.div>

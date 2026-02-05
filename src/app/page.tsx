@@ -12,7 +12,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white min-h-screen antialiased selection:bg-[#ff4d00] selection:text-black cursor-none">
+    <main className="bg-black text-white min-h-screen antialiased selection:bg-[#ff4d00] selection:text-black lg:cursor-none">
       <CustomCursor />
       <Navbar />
       <Hero />

@@ -46,13 +46,13 @@ export const Contact = () => {
 
                 <ScrollReveal variant="slide-up" delay={0.5}>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 w-full md:w-auto">
-                        <a href="https://github.com/aakarsh12x" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 bg-[#ff4d00] text-black font-bold tracking-[0.2em] uppercase text-xs hover:bg-white transition-all cursor-none">
+                        <a href="https://github.com/aakarsh12x" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 bg-[#ff4d00] text-black font-bold tracking-[0.2em] uppercase text-xs hover:bg-white transition-all lg:cursor-none">
                             GitHub
                         </a>
-                        <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
+                        <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all lg:cursor-none">
                             LinkedIn
                         </a>
-                        <a href="mailto:singhaakarsh28@gmail.com" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
+                        <a href="mailto:singhaakarsh28@gmail.com" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all lg:cursor-none">
                             Email Me
                         </a>
                     </div>
