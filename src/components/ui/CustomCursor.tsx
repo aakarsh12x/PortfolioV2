@@ -84,7 +84,8 @@ export const CustomCursor = () => {
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,
-                    opacity: isVisible ? 1 : 0,
+                    opacity: 0,
+                    display: isVisible ? 'block' : 'none',
                 }}
             >
                 <motion.div
@@ -92,6 +93,7 @@ export const CustomCursor = () => {
                     animate={{
                         width: isHovering ? 60 : isClicking ? 8 : 12,
                         height: isHovering ? 60 : isClicking ? 8 : 12,
+                        opacity: isVisible ? 1 : 0,
                     }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
                 />
@@ -103,7 +105,8 @@ export const CustomCursor = () => {
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,
-                    opacity: isVisible ? 0.5 : 0,
+                    opacity: 0,
+                    display: isVisible ? 'block' : 'none',
                 }}
             >
                 <motion.div
