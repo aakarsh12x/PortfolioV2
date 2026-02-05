@@ -68,6 +68,19 @@ export const CustomCursor = () => {
 
     if (isMobile) return null;
 
+    const [isMobile, setIsMobile] = useState(true); // Default to true to prevent flash
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 1024);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    if (isMobile) return null;
+
     return (
         <div className="hidden lg:block">
             {/* Main cursor dot */}
