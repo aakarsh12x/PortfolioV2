@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Aakarsh Singh — Developer",
   description: "Full Stack Developer & AI Enthusiast. Building digital experiences.",
   keywords: ["Developer", "React", "Node.js", "AI", "Full Stack"],
+  icons: {
+    icon: "/image.png",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased cursor-none`}>
+      <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased md:cursor-none`}>
         <CustomCursor />
         <ScrollProgress />
         <div className="noise" />

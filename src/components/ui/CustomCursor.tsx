@@ -60,7 +60,7 @@ export const CustomCursor = () => {
     }
 
     return (
-        <>
+        <div className="hidden md:block">
             {/* Main cursor dot */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
@@ -104,6 +104,6 @@ export const CustomCursor = () => {
                     }}
                 />
             </motion.div>
-        </>
+        </div>
     );
 };

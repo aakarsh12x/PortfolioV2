@@ -6,7 +6,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 
 export const Skills = () => {
     return (
-        <section className="py-16 bg-[#030303]">
+        <section id="skills" className="py-16 bg-[#030303]">
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
                 {/* Header */}
                 <div className="mb-20">
