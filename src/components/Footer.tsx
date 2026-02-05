@@ -61,7 +61,7 @@ export const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-white/20 font-mono">
-                        © 2025 Aakarsh Singh. All rights reserved.
+                        © 2026 Aakarsh Singh. All rights reserved.
                     </p>
                     <p className="text-xs text-white/20 font-mono">
                         Built with Next.js & Tailwind CSS

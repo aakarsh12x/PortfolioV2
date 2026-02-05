@@ -56,7 +56,7 @@ export const Hero = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="flex items-center gap-4 mb-8"
+                            className="flex items-center gap-4 mb-7"
                         >
                             <motion.span
                                 className="w-2 h-2 bg-[#ff4d00]"
@@ -66,7 +66,7 @@ export const Hero = () => {
                             <span className="text-sm font-bold tracking-[0.2em] uppercase text-white">Full Stack Developer</span>
                         </motion.div>
 
-                        <h1 className="text-6xl md:text-7xl lg:text-9xl font-black leading-[0.85] tracking-tighter mb-8 whitespace-nowrap" style={{ perspective: "1000px" }}>
+                        <h1 className="text-6xl md:text-7xl lg:text-9xl font-black leading-[0.85] tracking-tighter mb-7 whitespace-nowrap" style={{ perspective: "1000px" }}>
                             <AnimatedName text="Aakarsh" />
                             <AnimatedName text="Singh" fromRight color="text-[#ff4d00]" />
                         </h1>
@@ -76,7 +76,7 @@ export const Hero = () => {
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="flex items-center gap-3 mb-10"
+                            className="flex items-center gap-3 mb-8"
                         >
                             <GraduationCap className="w-5 h-5 text-[#ff4d00]" />
                             <span className="text-sm lg:text-base text-white/50 tracking-widest uppercase font-medium">
@@ -88,7 +88,7 @@ export const Hero = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
-                            className="text-lg text-white/40 max-w-md leading-loose mb-12"
+                            className="text-lg text-white/40 max-w-md leading-loose mb-8"
                         >
                             Building scalable products with React, Node.js & Cloud Architecture.
                             Impacted 25k+ users across multiple production applications.
