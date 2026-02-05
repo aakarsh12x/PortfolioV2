@@ -76,3 +76,16 @@ body {
 .animate-dark-pulse {
   animation: dark-pulse 3s ease-in-out infinite;
 }
+
+/* ===== HIDE CUSTOM CURSOR ON MOBILE/TOUCH ===== */
+@media (max-width: 1023px),
+(pointer: coarse) {
+
+  .custom-cursor-wrapper,
+  .custom-cursor-wrapper * {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}

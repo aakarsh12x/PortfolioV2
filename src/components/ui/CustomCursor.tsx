@@ -4,6 +4,21 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export const CustomCursor = () => {
+    // Mobile detection FIRST - before any other state or effects
+    const [isMobile, setIsMobile] = useState(true);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+            const isSmallScreen = window.innerWidth < 1024;
+            setIsMobile(isTouchDevice || isSmallScreen);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // All other hooks must be called unconditionally (React rules)
     const [isHovering, setIsHovering] = useState(false);
     const [isClicking, setIsClicking] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -16,6 +31,9 @@ export const CustomCursor = () => {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        // Don't attach any listeners on mobile
+        if (isMobile) return;
+
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
@@ -53,23 +71,13 @@ export const CustomCursor = () => {
             window.removeEventListener("mouseover", handleMouseOver);
             window.removeEventListener("mouseout", handleMouseOut);
         };
-    }, [cursorX, cursorY]);
+    }, [cursorX, cursorY, isMobile]);
 
-    const [isMobile, setIsMobile] = useState(true); // Default to true to prevent flash
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 1024);
-        };
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
+    // Return null on mobile - no rendering at all
     if (isMobile) return null;
 
     return (
-        <div className="hidden lg:block">
+        <div className="custom-cursor-wrapper hidden lg:block">
             {/* Main cursor dot */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
