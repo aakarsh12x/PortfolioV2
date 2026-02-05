@@ -77,7 +77,7 @@ export const CustomCursor = () => {
     if (isMobile) return null;
 
     return (
-        <div className="custom-cursor-wrapper hidden lg:block">
+        <div className="custom-cursor-wrapper">
             {/* Main cursor dot */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
