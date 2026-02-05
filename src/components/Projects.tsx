@@ -7,7 +7,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 export const Projects = () => {
     return (
         <section id="projects" className="py-16 bg-[#050505] overflow-hidden">
-            <div className="max-w-7xl mx-auto px-16 lg:px-32">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
 
                 {/* Header */}
                 <div className="mb-20">

@@ -47,7 +47,7 @@ const AnimatedName = ({ text, fromRight = false, color = "text-white" }: { text:
 export const Hero = () => {
     return (
         <section className="min-h-screen flex items-center pt-30 pb-12 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-16 lg:px-32 w-full">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32 w-full">
                 <div className="grid lg:grid-cols-2 gap-32 items-center">
 
                     {/* Left */}

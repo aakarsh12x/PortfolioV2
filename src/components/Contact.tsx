@@ -5,7 +5,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 export const Contact = () => {
     return (
         <section id="contact" className="py-16 bg-black border-t border-white/10">
-            <div className="max-w-5xl mx-auto px-16 lg:px-32 text-center">
+            <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-32 text-center">
                 <ScrollReveal variant="slide-up">
                     <span className="text-[#ff4d00] text-xs tracking-[0.3em] uppercase mb-12 block">Get In Touch</span>
                 </ScrollReveal>
@@ -45,14 +45,14 @@ export const Contact = () => {
                 </ScrollReveal>
 
                 <ScrollReveal variant="slide-up" delay={0.5}>
-                    <div className="flex items-center justify-center gap-6">
-                        <a href="https://github.com/aakarsh12x" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-[#ff4d00] text-black font-bold tracking-[0.2em] uppercase text-xs hover:bg-white transition-all cursor-none">
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 w-full md:w-auto">
+                        <a href="https://github.com/aakarsh12x" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 bg-[#ff4d00] text-black font-bold tracking-[0.2em] uppercase text-xs hover:bg-white transition-all cursor-none">
                             GitHub
                         </a>
-                        <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank" rel="noopener noreferrer" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
+                        <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
                             LinkedIn
                         </a>
-                        <a href="mailto:singhaakarsh28@gmail.com" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
+                        <a href="mailto:singhaakarsh28@gmail.com" className="w-full md:w-auto px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all cursor-none">
                             Email Me
                         </a>
                     </div>

@@ -7,7 +7,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 export const Skills = () => {
     return (
         <section className="py-16 bg-[#030303]">
-            <div className="max-w-7xl mx-auto px-16 lg:px-32">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
                 {/* Header */}
                 <div className="mb-20">
                     <ScrollReveal variant="slide-up">
@@ -26,7 +26,13 @@ export const Skills = () => {
                             <StaggerContainer className="flex flex-wrap gap-x-4 gap-y-2" staggerDelay={0.05} initialDelay={0.2}>
                                 {cat.items.map((item, j) => (
                                     <StaggerItem key={item} variant="fade-up">
-                                        <span className="text-2xl lg:text-3xl font-black text-white/20 hover:text-white transition-colors cursor-default leading-tight">
+                                        <span
+                                            className="text-3xl lg:text-5xl font-black text-white animate-dark-pulse md:animate-none md:text-white/20 md:hover:text-white transition-colors cursor-default leading-tight"
+                                            style={{
+                                                animationDelay: `${((i * 10 + j) * 0.7) % 5}s`,
+                                                animationDuration: `${4 + ((i * 10 + j) * 0.5) % 4}s`
+                                            }}
+                                        >
                                             {item} <span className="text-[#ff4d00]/20">•</span>
                                         </span>
                                     </StaggerItem>

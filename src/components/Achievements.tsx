@@ -6,7 +6,7 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 export const Achievements = () => {
     return (
         <section className="py-16 border-y border-white/5 bg-[#080808]">
-            <div className="max-w-7xl mx-auto px-16 lg:px-32">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
 
                 {/* Header */}
                 <div className="mb-15">
