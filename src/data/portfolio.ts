@@ -94,7 +94,7 @@ export const PROJECTS = [
         title: "Geospatial Social Platform",
         desc: "Crafted proximity-based content discovery enabling real-time user matching within a selected radius, supporting 1k+ location queries/day. Accelerated spatial queries in PostGIS using batching tuning, achieving 48% faster match performance.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "PostGIS", "Socket.IO"],
-        url: "https://cherry.date"
+        url: "https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app"
     },
     {
         title: "AI Expense Tracker",
