@@ -34,7 +34,7 @@ export const Navbar = () => {
             transition: {
                 delay: 0.3 + (i * 0.1),
                 duration: 0.4,
-                ease: "easeOut"
+                ease: "easeOut" as any
             }
         })
     };
