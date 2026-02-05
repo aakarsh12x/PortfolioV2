@@ -4,15 +4,24 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export const CustomCursor = () => {
-    // Mobile detection FIRST - before any other state or effects
+    // Aggressive mobile detection - start with true to prevent flash
     const [isMobile, setIsMobile] = useState(true);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
+        // Multiple checks for mobile devices
         const checkMobile = () => {
-            const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+            const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+            const hasNoHover = window.matchMedia("(hover: none)").matches;
             const isSmallScreen = window.innerWidth < 1024;
-            setIsMobile(isTouchDevice || isSmallScreen);
+            const isTouchCapable = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            // If ANY of these are true, it's mobile
+            const mobile = hasCoarsePointer || hasNoHover || isSmallScreen || isTouchCapable;
+            setIsMobile(mobile);
+            setIsReady(true);
         };
+
         checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
@@ -26,24 +35,39 @@ export const CustomCursor = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    const springConfig = { damping: 25, stiffness: 400 };
+    const springConfig = { damping: 30, stiffness: 500 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
-        // Don't attach any listeners on mobile
-        if (isMobile) return;
+        // Don't attach ANY listeners on mobile or before ready
+        if (isMobile || !isReady) return;
+
+        // Filter out touch-generated mouse events
+        let lastTouchTime = 0;
 
         const moveCursor = (e: MouseEvent) => {
+            // Ignore mouse events that come from touch (within 500ms of touch)
+            if (Date.now() - lastTouchTime < 500) return;
+
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
             setIsVisible(true);
         };
 
-        const handleMouseDown = () => setIsClicking(true);
-        const handleMouseUp = () => setIsClicking(false);
+        const handleMouseDown = (e: MouseEvent) => {
+            if (Date.now() - lastTouchTime < 500) return;
+            setIsClicking(true);
+        };
+
+        const handleMouseUp = (e: MouseEvent) => {
+            if (Date.now() - lastTouchTime < 500) return;
+            setIsClicking(false);
+        };
 
         const handleMouseOver = (e: MouseEvent) => {
+            if (Date.now() - lastTouchTime < 500) return;
+
             const target = e.target as HTMLElement;
             if (
                 target.tagName === "A" ||
@@ -58,11 +82,18 @@ export const CustomCursor = () => {
 
         const handleMouseOut = () => setIsHovering(false);
 
+        // Track touch events to filter mouse events
+        const handleTouch = () => {
+            lastTouchTime = Date.now();
+        };
+
         window.addEventListener("mousemove", moveCursor);
         window.addEventListener("mousedown", handleMouseDown);
         window.addEventListener("mouseup", handleMouseUp);
         window.addEventListener("mouseover", handleMouseOver);
         window.addEventListener("mouseout", handleMouseOut);
+        window.addEventListener("touchstart", handleTouch, { passive: true });
+        window.addEventListener("touchmove", handleTouch, { passive: true });
 
         return () => {
             window.removeEventListener("mousemove", moveCursor);
@@ -70,11 +101,13 @@ export const CustomCursor = () => {
             window.removeEventListener("mouseup", handleMouseUp);
             window.removeEventListener("mouseover", handleMouseOver);
             window.removeEventListener("mouseout", handleMouseOut);
+            window.removeEventListener("touchstart", handleTouch);
+            window.removeEventListener("touchmove", handleTouch);
         };
-    }, [cursorX, cursorY, isMobile]);
+    }, [cursorX, cursorY, isMobile, isReady]);
 
     // Return null on mobile - no rendering at all
-    if (isMobile) return null;
+    if (isMobile || !isReady) return null;
 
     return (
         <div className="custom-cursor-wrapper">
@@ -84,43 +117,48 @@ export const CustomCursor = () => {
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,
-                    opacity: 0,
-                    display: isVisible ? 'block' : 'none',
                 }}
             >
                 <motion.div
                     className="relative -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
                     animate={{
-                        width: isHovering ? 60 : isClicking ? 8 : 12,
-                        height: isHovering ? 60 : isClicking ? 8 : 12,
+                        width: isHovering ? 50 : isClicking ? 6 : 10,
+                        height: isHovering ? 50 : isClicking ? 6 : 10,
                         opacity: isVisible ? 1 : 0,
                     }}
-                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 28,
+                    }}
                 />
             </motion.div>
 
-            {/* Glow ring */}
+            {/* Outer ring with glow */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9998]"
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,
-                    opacity: 0,
-                    display: isVisible ? 'block' : 'none',
                 }}
             >
                 <motion.div
-                    className="relative -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#ff4d00]"
+                    className="relative -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
                     animate={{
-                        width: isHovering ? 80 : 40,
-                        height: isHovering ? 80 : 40,
-                        opacity: isHovering ? 1 : 0.3,
+                        width: isHovering ? 70 : 35,
+                        height: isHovering ? 70 : 35,
+                        opacity: isVisible ? (isHovering ? 0.8 : 0.4) : 0,
+                        borderColor: isHovering ? "#ff4d00" : "rgba(255, 77, 0, 0.5)",
                     }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 25,
+                    }}
                     style={{
                         boxShadow: isHovering
-                            ? "0 0 20px rgba(255, 77, 0, 0.5)"
-                            : "0 0 10px rgba(255, 77, 0, 0.2)",
+                            ? "0 0 25px rgba(255, 77, 0, 0.6), inset 0 0 15px rgba(255, 77, 0, 0.3)"
+                            : "0 0 12px rgba(255, 77, 0, 0.25)",
                     }}
                 />
             </motion.div>

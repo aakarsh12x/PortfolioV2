@@ -78,14 +78,48 @@ body {
 }
 
 /* ===== HIDE CUSTOM CURSOR ON MOBILE/TOUCH ===== */
-@media (max-width: 1023px),
-(pointer: coarse) {
+/* Multiple media queries to catch all mobile scenarios */
+@media (max-width: 1023px) {
 
   .custom-cursor-wrapper,
-  .custom-cursor-wrapper * {
+  .custom-cursor-wrapper *,
+  div[class*="cursor"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+  }
+}
+
+@media (hover: none) {
+
+  .custom-cursor-wrapper,
+  .custom-cursor-wrapper *,
+  div[class*="cursor"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+
+  .custom-cursor-wrapper,
+  .custom-cursor-wrapper *,
+  div[class*="cursor"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Hide all fixed positioned cursor elements on touch devices */
+@media (hover: none) and (pointer: coarse) {
+
+  div[class*="fixed"][class*="z-[999"],
+  div[class*="fixed"][class*="pointer-events-none"] {
+    display: none !important;
   }
 }
