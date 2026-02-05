@@ -122,7 +122,7 @@ export const CustomCursor = () => {
                         width: isClicking ? 4 : 8,
                         height: isClicking ? 4 : 8,
                         opacity: isVisible ? 1 : 0,
-                        scale: isHovering ? 0 : 1,
+                        scale: isHovering ? 1.5 : 1,
                     }}
                     transition={{
                         type: "spring",
@@ -163,66 +163,6 @@ export const CustomCursor = () => {
                     }}
                 />
             </motion.div>
-
-            {/* Outer glow ring - even more delayed */}
-            <motion.div
-                className="fixed top-0 left-0 pointer-events-none z-[9997]"
-                style={{
-                    x: delayedX,
-                    y: delayedY,
-                }}
-            >
-                <motion.div
-                    className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
-                    animate={{
-                        width: isHovering ? 80 : 0,
-                        height: isHovering ? 80 : 0,
-                        opacity: isVisible && isHovering ? 0.3 : 0,
-                    }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 200,
-                        damping: 30,
-                    }}
-                    style={{
-                        background: "radial-gradient(circle, rgba(255, 77, 0, 0.3) 0%, transparent 70%)",
-                        filter: "blur(8px)",
-                    }}
-                />
-            </motion.div>
-
-            {/* Hover state - expanding circle */}
-            {isHovering && (
-                <motion.div
-                    className="fixed top-0 left-0 pointer-events-none z-[9999]"
-                    style={{
-                        x: cursorXSpring,
-                        y: cursorYSpring,
-                    }}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                >
-                    <motion.div
-                        className="relative -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center"
-                        animate={{
-                            width: 60,
-                            height: 60,
-                            rotate: 360,
-                        }}
-                        transition={{
-                            width: { type: "spring", stiffness: 400, damping: 28 },
-                            height: { type: "spring", stiffness: 400, damping: 28 },
-                            rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                        }}
-                        style={{
-                            background: "linear-gradient(135deg, rgba(255, 77, 0, 0.15), rgba(255, 107, 53, 0.15))",
-                            border: "1px solid rgba(255, 77, 0, 0.3)",
-                            boxShadow: "0 0 20px rgba(255, 77, 0, 0.4), inset 0 0 20px rgba(255, 77, 0, 0.1)",
-                        }}
-                    />
-                </motion.div>
-            )}
         </div>
     );
 };
