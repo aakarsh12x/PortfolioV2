@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased md:cursor-none`}>
+      <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased lg:cursor-none`}>
         <CustomCursor />
         <ScrollProgress />
         <div className="noise" />

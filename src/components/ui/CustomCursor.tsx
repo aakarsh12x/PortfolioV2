@@ -69,7 +69,7 @@ export const CustomCursor = () => {
     if (isMobile) return null;
 
     return (
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
             {/* Main cursor dot */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
