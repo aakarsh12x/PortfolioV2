@@ -21,7 +21,23 @@ export default function JsonLd() {
             "@type": "CollegeOrUniversity",
             name: "IIIT Bhopal"
         },
-        knowsAbout: ["Full Stack Development", "AI Engineering", "React", "Next.js", "Node.js", "Cloud Architecture"]
+        knowsAbout: [
+            "Full Stack Development",
+            "AI Engineering",
+            "React",
+            "Next.js",
+            "Node.js",
+            "TypeScript",
+            "JavaScript",
+            "React Native",
+            "Flutter",
+            "AWS",
+            "Cloud Architecture",
+            "MongoDB",
+            "PostgreSQL",
+            "Docker",
+            "Competitive Programming"
+        ]
     };
 
     return (
