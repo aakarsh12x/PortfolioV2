@@ -104,7 +104,7 @@ export const Hero = () => {
                                 Contact Me
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </a>
-                            <a href="https://drive.google.com/file/d/1YkAAahT3mnxU-wAC_qXMCWBHLeLAl9g1/view?usp=sharing" target="_blank" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all lg:cursor-none">
+                            <a href="https://drive.google.com/file/d/1qCU517z0RY_Bq-8bzfwq1Ohpp5aPvXfV/view?usp=drive_link" target="_blank" className="px-8 py-4 border border-white/10 text-xs tracking-[0.2em] uppercase hover:bg-white/5 hover:border-[#ff4d00] transition-all lg:cursor-none">
                                 Resume
                             </a>
                         </motion.div>
