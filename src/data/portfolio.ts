@@ -14,9 +14,9 @@ export const EXPERIENCE = [
         current: true,
         description: "Directed end-to-end development of a mobile dating platform using React Native, Node.js, and MongoDB, implementing geospatial indexing for location-based matching within a 5–100 km radius.",
         metrics: [
-            { value: "5k+ *Growing Rapidly", label: "Active Users" },
-            { value: "<150ms", label: "API Generates Recommendations in" },
-            { value: "2M+", label: "User Engagement On Social Media" },
+            { value: "10k+ *Growing Rapidly", label: "Active Users" },
+            { value: "<200ms", label: "API Generates Recommendations in" },
+            { value: "3M+", label: "User Engagement On Social Media" },
         ],
         tech: ["React Native", "Node.js", "MongoDB", "Express", "Axios", "Tailwind", "Framer Motion"],
     },
