@@ -125,8 +125,8 @@ export const ACHIEVEMENTS = [
     },
     {
         label: "Startup Growth",
-        value: "5k+",
-        desc: "Scaled Cherry from 0 to 5,000+ users rapidly",
+        value: "10k+",
+        desc: "Scaled Cherry from 0 to 10,000+ users rapidly",
         icon: Rocket
     },
     {
