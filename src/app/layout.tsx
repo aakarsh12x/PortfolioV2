@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Syne } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import JsonLd from "@/components/JsonLd";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -90,20 +91,28 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased lg:cursor-none`}>
-        <CustomCursor />
-        <ScrollProgress />
-        <div className="noise" />
-        <div className="grid-overlay" />
-        <JsonLd />
-        {children}
+        <ThemeProvider>
+          <CustomCursor />
+          <ScrollProgress />
+          <div className="noise" />
+          <div className="grid-overlay" />
+          <JsonLd />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
