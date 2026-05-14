@@ -2,7 +2,7 @@
 
 export const Footer = () => {
     return (
-        <footer className="py-12 bg-black border-t border-white/5">
+        <footer className="py-12" style={{ backgroundColor: "var(--bg-primary)", borderTop: "1px solid var(--border-subtle)" }}>
             <div className="max-w-7xl mx-auto px-16 lg:px-32">
 
                 {/* Main Footer Content */}
@@ -11,59 +11,62 @@ export const Footer = () => {
                     {/* Brand */}
                     <div>
                         <h3 className="text-2xl font-black mb-6">
-                            <span className="text-[#ff4d00]">A</span>S<span className="text-[#ff4d00]">.</span>
+                            <span style={{ color: "var(--accent)" }}>A</span>
+                            <span style={{ color: "var(--text-primary)" }}>S</span>
+                            <span style={{ color: "var(--accent)" }}>.</span>
                         </h3>
-                        <p className="text-white/30 text-sm leading-relaxed">
+                        <p className="text-sm leading-relaxed" style={{ color: "var(--text-faint)" }}>
                             Full-stack engineer building scalable products with modern technologies.
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-6">Navigation</h4>
+                        <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-6" style={{ color: "var(--text-muted)" }}>Navigation</h4>
                         <div className="flex flex-col gap-3">
-                            <a href="#experience" className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors">Experience</a>
-                            <a href="#projects" className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors">Projects</a>
-                            <a href="#contact" className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors">Contact</a>
+                            {["experience", "projects", "contact"].map((link) => (
+                                <a key={link} href={`#${link}`}
+                                    className="text-sm capitalize transition-colors"
+                                    style={{ color: "var(--text-faint)" }}
+                                    onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                                    onMouseLeave={e => (e.currentTarget.style.color = "var(--text-faint)")}
+                                >
+                                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     {/* Social */}
                     <div>
-                        <h4 className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-6">Connect</h4>
+                        <h4 className="text-xs font-bold tracking-[0.2em] uppercase mb-6" style={{ color: "var(--text-muted)" }}>Connect</h4>
                         <div className="flex flex-col gap-3">
-                            <a
-                                href="https://github.com/aakarsh12x"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors"
-                            >
-                                GitHub
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors"
-                            >
-                                LinkedIn
-                            </a>
-                            <a
-                                href="mailto:singhaakarsh28@gmail.com"
-                                className="text-sm text-white/50 hover:text-[#ff4d00] transition-colors"
-                            >
-                                Email
-                            </a>
+                            {[
+                                { href: "https://github.com/aakarsh12x", label: "GitHub" },
+                                { href: "https://www.linkedin.com/in/aakarsh-singh-b27a5228b/", label: "LinkedIn" },
+                                { href: "mailto:singhaakarsh28@gmail.com", label: "Email" },
+                            ].map(({ href, label }) => (
+                                <a key={label} href={href}
+                                    target={href.startsWith("http") ? "_blank" : undefined}
+                                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                    className="text-sm transition-colors"
+                                    style={{ color: "var(--text-faint)" }}
+                                    onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                                    onMouseLeave={e => (e.currentTarget.style.color = "var(--text-faint)")}
+                                >
+                                    {label}
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-white/20 font-mono">
+                <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: "1px solid var(--border-subtle)" }}>
+                    <p className="text-xs font-mono" style={{ color: "var(--text-trace)" }}>
                         © 2026 Aakarsh Singh. All rights reserved.
                     </p>
-                    <p className="text-xs text-white/20 font-mono">
+                    <p className="text-xs font-mono" style={{ color: "var(--text-trace)" }}>
                         Built with Next.js & Tailwind CSS
                     </p>
                 </div>
