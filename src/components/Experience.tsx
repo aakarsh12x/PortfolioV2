@@ -96,10 +96,11 @@ export const Experience = () => {
 
                     <StaggerContainer className="grid md:grid-cols-2 gap-8" staggerDelay={0.2}>
                         {COLLEGE_EXPERIENCE.map((role, i) => (
-                            <StaggerItem key={i} variant="fade-up"
-                                className="p-5 lg:p-12 flex items-start gap-4 lg:gap-8 transition-colors group"
-                                style={{ backgroundColor: "var(--surface-1)", border: "1px solid var(--border-subtle)" }}
-                            >
+                            <StaggerItem key={i} variant="fade-up">
+                                <div
+                                    className="p-5 lg:p-12 flex items-start gap-4 lg:gap-8 transition-colors group h-full"
+                                    style={{ backgroundColor: "var(--surface-1)", border: "1px solid var(--border-subtle)" }}
+                                >
                                 <div className="p-3 lg:p-4 rounded-full transition-colors" style={{ backgroundColor: "var(--surface-3)" }}>
                                     <role.icon className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "var(--text-muted)" }} />
                                 </div>
@@ -110,6 +111,7 @@ export const Experience = () => {
                                         <span>{role.institution}</span>
                                         <span>{role.period}</span>
                                     </div>
+                                </div>
                                 </div>
                             </StaggerItem>
                         ))}
