@@ -1,56 +1,108 @@
 "use client";
 
 import { ACHIEVEMENTS } from "@/data/portfolio";
-import { ScrollReveal } from "./ui/ScrollReveal";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export const Achievements = () => {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.1 });
+
     return (
-        <section className="py-16 border-y border-white/5 bg-[#080808]">
+        <section
+            className="py-8 lg:py-20"
+            style={{
+                backgroundColor: "var(--bg-section)",
+                borderTop: "1px solid var(--border-subtle)",
+                borderBottom: "1px solid var(--border-subtle)",
+            }}
+        >
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
 
                 {/* Header */}
-                <div className="mb-15">
-                    <ScrollReveal variant="slide-up">
-                        <span className="text-[#ff4d00] text-xs tracking-[0.3em] uppercase mb-6 block">Recognition</span>
-                        <h2 className="text-3xl lg:text-5xl font-black tracking-tighter">Achievements</h2>
-                    </ScrollReveal>
-                </div>
+                <motion.div
+                    className="mb-8 lg:mb-16"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    ref={ref}
+                >
+                    <span className="text-xs tracking-[0.3em] uppercase mb-4 block" style={{ color: "var(--accent)" }}>
+                        Recognition
+                    </span>
+                    <h2 className="text-3xl lg:text-4xl font-black tracking-tighter" style={{ color: "var(--text-primary)" }}>
+                        Achievements
+                    </h2>
+                    <div className="mt-4 h-px w-24" style={{ backgroundColor: "var(--accent)", opacity: 0.5 }} />
+                </motion.div>
 
-                {/* Achievement Cards - Horizontal Layout */}
-                <div className="grid md:grid-cols-2 gap-1">
+                {/* Cards — 2×2 on mobile, 4×1 on desktop, with border hairlines */}
+                <div className="grid grid-cols-2 lg:grid-cols-4">
                     {ACHIEVEMENTS.map((item, i) => (
-                        <ScrollReveal key={i} variant="scale" delay={i * 0.1}>
-                            <div
-                                className="group relative bg-black border border-white/10 hover:border-[#ff4d00] transition-all duration-500 overflow-hidden h-full"
-                                style={{ padding: '50px 40px' }}
-                            >
-                                {/* Background Icon */}
-                                <div className="absolute top-8 right-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
-                                    <item.icon className="w-32 h-32 text-[#ff4d00]" strokeWidth={1} />
-                                </div>
+                        <motion.div
+                            key={i}
+                            className="group relative flex flex-col justify-between overflow-hidden p-5 lg:p-10 transition-colors duration-500"
+                            style={{
+                                backgroundColor: "var(--bg-section)",
+                                minHeight: "clamp(150px, 20vw, 250px)",
+                                borderRight: i < 3 ? "1px solid var(--border-subtle)" : undefined,
+                                borderBottom: i < 2 ? "1px solid var(--border-subtle)" : undefined,
+                            }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "var(--surface-2)")}
+                            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "var(--bg-section)")}
+                        >
+                            {/* Index */}
+                            <span className="text-[10px] tracking-[0.25em] uppercase font-mono mb-2 block" style={{ color: "var(--text-trace)" }}>
+                                0{i + 1}
+                            </span>
 
-                                {/* Content */}
-                                <div className="relative z-10 flex items-start gap-8">
-                                    {/* Icon */}
-                                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-[#ff4d00]/10 border border-[#ff4d00]/20 group-hover:bg-[#ff4d00]/20 transition-colors">
-                                        <item.icon className="w-8 h-8 text-[#ff4d00]" strokeWidth={1.5} />
-                                    </div>
-
-                                    {/* Text */}
-                                    <div className="flex-1">
-                                        <h3 className="text-4xl font-black text-[#ff4d00] mb-3 leading-none group-hover:scale-105 transition-transform origin-left">
-                                            {item.value}
-                                        </h3>
-                                        <p className="text-sm font-bold uppercase tracking-[0.15em] text-white/60 mb-3">
-                                            {item.label}
-                                        </p>
-                                        <p className="text-sm text-white/40 leading-relaxed">
-                                            {item.desc}
-                                        </p>
-                                    </div>
-                                </div>
+                            {/* Value */}
+                            <div className="mb-3">
+                                <span
+                                    className="font-black leading-none block group-hover:scale-105 transition-transform duration-300 origin-left"
+                                    style={{
+                                        color: "var(--accent)",
+                                        fontSize: "clamp(1.2rem, 3vw, 2.5rem)",
+                                    }}
+                                >
+                                    {item.value}
+                                </span>
                             </div>
-                        </ScrollReveal>
+
+                            {/* Expanding line */}
+                            <div
+                                className="h-px w-8 group-hover:w-full transition-all duration-500 mb-3"
+                                style={{ backgroundColor: "var(--accent)", opacity: 0.35 }}
+                            />
+
+                            {/* Label */}
+                            <p className="text-[9px] lg:text-[10px] font-bold uppercase tracking-[0.15em] leading-tight" style={{ color: "var(--text-faint)" }}>
+                                {item.label}
+                            </p>
+
+                            {/* Desc – desktop only */}
+                            <p className="hidden lg:block text-xs mt-2 leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                                {item.desc}
+                            </p>
+
+                            {/* Corner glow */}
+                            <div
+                                className="absolute -bottom-10 -right-10 w-28 h-28 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"
+                                style={{ backgroundColor: `rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.12)` }}
+                            />
+
+                            {/* Background icon */}
+                            <div className="absolute top-3 right-3 opacity-[0.04] group-hover:opacity-[0.09] transition-opacity pointer-events-none">
+                                <item.icon
+                                    className="w-10 h-10 lg:w-16 lg:h-16"
+                                    style={{ color: "var(--accent)" }}
+                                    strokeWidth={1}
+                                />
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
