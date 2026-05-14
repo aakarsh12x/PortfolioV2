@@ -1,19 +1,85 @@
 @import "tailwindcss";
 
-/* ===== CUSTOM PROPERTIES ===== */
+/* ===== THEME TOKENS ===== */
 :root {
-  --bg-primary: #000000;
+  /* Backgrounds */
+  --bg-primary:   #000000;
   --bg-secondary: #0a0a0a;
-  --text-primary: #ffffff;
-  --text-muted: #666666;
-  --accent: #ff4d00;
-  --accent-secondary: #00ff88;
+  --bg-card:      #050505;
+  --bg-section:   #080808;
+  --bg-subtle:    #030303;
+
+  /* Accent */
+  --accent:        #ff4d00;
+  --accent-r:      255;
+  --accent-g:      77;
+  --accent-b:      0;
+
+  /* Text */
+  --text-primary:  #ffffff;
+  --text-dim:      rgba(255,255,255,0.6);
+  --text-muted:    rgba(255,255,255,0.4);
+  --text-faint:    rgba(255,255,255,0.3);
+  --text-ghost:    rgba(255,255,255,0.2);
+  --text-trace:    rgba(255,255,255,0.15);
+
+  /* Surfaces (fills) */
+  --surface-1:  rgba(255,255,255,0.02);
+  --surface-2:  rgba(255,255,255,0.05);
+  --surface-3:  rgba(255,255,255,0.08);
+  --surface-4:  rgba(255,255,255,0.1);
+
+  /* Borders */
+  --border:        rgba(255,255,255,0.1);
+  --border-subtle: rgba(255,255,255,0.05);
+
+  /* Misc */
+  --noise-opacity: 0.015;
+  --grid-line:     rgba(255,255,255,0.03);
 }
+
+/* ===== LIGHT MODE — Warm Ivory + Burnt Sienna ===== */
+html.light {
+  /* Warm ivory/parchment backgrounds */
+  --bg-primary:   #e8ddd0;   /* warm parchment base */
+  --bg-secondary: #dfd4c5;   /* slightly deeper, inset */
+  --bg-card:      #f0e8dc;   /* elevated warm cream */
+  --bg-section:   #e2d6c8;   /* alternating section */
+  --bg-subtle:    #ece3d8;   /* subtle warm fill */
+
+  /* Burnt sienna accent */
+  --accent:   #9a3412;
+  --accent-r: 154;
+  --accent-g: 52;
+  --accent-b: 18;
+
+  /* Text — deep warm brown, harmonizes with ivory */
+  --text-primary: #1a1209;
+  --text-dim:     rgba(26,18,9,0.85);
+  --text-muted:   rgba(26,18,9,0.68);
+  --text-faint:   rgba(26,18,9,0.55);
+  --text-ghost:   rgba(26,18,9,0.38);
+  --text-trace:   rgba(26,18,9,0.24);
+
+  /* Surface fills — warm tints */
+  --surface-1:  rgba(26,18,9,0.03);
+  --surface-2:  rgba(26,18,9,0.06);
+  --surface-3:  rgba(26,18,9,0.10);
+  --surface-4:  rgba(26,18,9,0.15);
+
+  /* Borders — warm definition */
+  --border:        rgba(26,18,9,0.16);
+  --border-subtle: rgba(26,18,9,0.09);
+
+  --noise-opacity: 0;
+  --grid-line:     rgba(26,18,9,0.05);
+}
+
 
 html,
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
   overflow-x: hidden;
   max-width: 100vw;
   margin: 0;
@@ -45,7 +111,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.015;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -56,8 +122,8 @@ body {
   pointer-events: none;
   z-index: 1;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 100px 100px;
 }
 
