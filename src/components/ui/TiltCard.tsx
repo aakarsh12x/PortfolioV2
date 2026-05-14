@@ -66,7 +66,7 @@ export const TiltCard = ({
                 <motion.div
                     className="absolute inset-0 pointer-events-none rounded-inherit"
                     style={{
-                        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 77, 0, 0.15) 0%, transparent 50%)`,
+                        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.15) 0%, transparent 50%)`,
                     }}
                 />
             )}

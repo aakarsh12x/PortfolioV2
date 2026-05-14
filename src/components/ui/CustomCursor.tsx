@@ -6,24 +6,6 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 export const CustomCursor = () => {
     const [isMobile, setIsMobile] = useState(true);
     const [isReady, setIsReady] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-            const hasNoHover = window.matchMedia("(hover: none)").matches;
-            const isSmallScreen = window.innerWidth < 1024;
-            const isTouchCapable = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-            const mobile = hasCoarsePointer || hasNoHover || isSmallScreen || isTouchCapable;
-            setIsMobile(mobile);
-            setIsReady(true);
-        };
-
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
     const [isHovering, setIsHovering] = useState(false);
     const [isClicking, setIsClicking] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -31,76 +13,64 @@ export const CustomCursor = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    // Smooth spring animation for the main cursor
     const springConfig = { damping: 28, stiffness: 400 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
+    const delayedX = useSpring(cursorX, { damping: 30, stiffness: 200 });
+    const delayedY = useSpring(cursorY, { damping: 30, stiffness: 200 });
 
-    // Delayed spring for the trailing ring
-    const delayedSpringConfig = { damping: 30, stiffness: 200 };
-    const delayedX = useSpring(cursorX, delayedSpringConfig);
-    const delayedY = useSpring(cursorY, delayedSpringConfig);
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile =
+                window.matchMedia("(pointer: coarse)").matches ||
+                window.matchMedia("(hover: none)").matches ||
+                window.innerWidth < 1024 ||
+                ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+            setIsMobile(mobile);
+            setIsReady(true);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     useEffect(() => {
         if (isMobile || !isReady) return;
 
         let lastTouchTime = 0;
-
         const moveCursor = (e: MouseEvent) => {
             if (Date.now() - lastTouchTime < 500) return;
-
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
             setIsVisible(true);
         };
-
-        const handleMouseDown = (e: MouseEvent) => {
+        const onDown = () => setIsClicking(true);
+        const onUp = () => setIsClicking(false);
+        const onOver = (e: MouseEvent) => {
             if (Date.now() - lastTouchTime < 500) return;
-            setIsClicking(true);
-        };
-
-        const handleMouseUp = (e: MouseEvent) => {
-            if (Date.now() - lastTouchTime < 500) return;
-            setIsClicking(false);
-        };
-
-        const handleMouseOver = (e: MouseEvent) => {
-            if (Date.now() - lastTouchTime < 500) return;
-
-            const target = e.target as HTMLElement;
-            if (
-                target.tagName === "A" ||
-                target.tagName === "BUTTON" ||
-                target.closest("a") ||
-                target.closest("button") ||
-                target.classList.contains("cursor-pointer")
-            ) {
+            const t = e.target as HTMLElement;
+            if (t.tagName === "A" || t.tagName === "BUTTON" || t.closest("a") || t.closest("button"))
                 setIsHovering(true);
-            }
         };
-
-        const handleMouseOut = () => setIsHovering(false);
-
-        const handleTouch = () => {
-            lastTouchTime = Date.now();
-        };
+        const onOut = () => setIsHovering(false);
+        const onTouch = () => { lastTouchTime = Date.now(); };
 
         window.addEventListener("mousemove", moveCursor);
-        window.addEventListener("mousedown", handleMouseDown);
-        window.addEventListener("mouseup", handleMouseUp);
-        window.addEventListener("mouseover", handleMouseOver);
-        window.addEventListener("mouseout", handleMouseOut);
-        window.addEventListener("touchstart", handleTouch, { passive: true });
-        window.addEventListener("touchmove", handleTouch, { passive: true });
+        window.addEventListener("mousedown", onDown);
+        window.addEventListener("mouseup", onUp);
+        window.addEventListener("mouseover", onOver);
+        window.addEventListener("mouseout", onOut);
+        window.addEventListener("touchstart", onTouch, { passive: true });
+        window.addEventListener("touchmove", onTouch, { passive: true });
 
         return () => {
             window.removeEventListener("mousemove", moveCursor);
-            window.removeEventListener("mousedown", handleMouseDown);
-            window.removeEventListener("mouseup", handleMouseUp);
-            window.removeEventListener("mouseover", handleMouseOver);
-            window.removeEventListener("mouseout", handleMouseOut);
-            window.removeEventListener("touchstart", handleTouch);
-            window.removeEventListener("touchmove", handleTouch);
+            window.removeEventListener("mousedown", onDown);
+            window.removeEventListener("mouseup", onUp);
+            window.removeEventListener("mouseover", onOver);
+            window.removeEventListener("mouseout", onOut);
+            window.removeEventListener("touchstart", onTouch);
+            window.removeEventListener("touchmove", onTouch);
         };
     }, [cursorX, cursorY, isMobile, isReady]);
 
@@ -108,13 +78,10 @@ export const CustomCursor = () => {
 
     return (
         <div className="custom-cursor-wrapper">
-            {/* Central dot - fast following */}
+            {/* Central dot — uses CSS variable directly, no JS color tracking needed */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999]"
-                style={{
-                    x: cursorXSpring,
-                    y: cursorYSpring,
-                }}
+                style={{ x: cursorXSpring, y: cursorYSpring }}
             >
                 <motion.div
                     className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -124,25 +91,18 @@ export const CustomCursor = () => {
                         opacity: isVisible ? 1 : 0,
                         scale: isHovering ? 1.5 : 1,
                     }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 500,
-                        damping: 30,
-                    }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     style={{
-                        background: "linear-gradient(135deg, #ff4d00, #ff6b35)",
-                        boxShadow: "0 0 15px rgba(255, 77, 0, 0.8)",
+                        background: "var(--accent)",
+                        boxShadow: "0 0 12px rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.8)",
                     }}
                 />
             </motion.div>
 
-            {/* Delayed trailing ring */}
+            {/* Trailing ring */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9998]"
-                style={{
-                    x: delayedX,
-                    y: delayedY,
-                }}
+                style={{ x: delayedX, y: delayedY }}
             >
                 <motion.div
                     className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -152,14 +112,10 @@ export const CustomCursor = () => {
                         opacity: isVisible ? (isHovering ? 0.5 : 0.3) : 0,
                         scale: isClicking ? 0.9 : 1,
                     }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 25,
-                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     style={{
-                        border: "2px solid rgba(255, 77, 0, 0.6)",
-                        background: "radial-gradient(circle, rgba(255, 77, 0, 0.1) 0%, transparent 70%)",
+                        border: "2px solid rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.6)",
+                        background: "radial-gradient(circle, rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.1) 0%, transparent 70%)",
                     }}
                 />
             </motion.div>
