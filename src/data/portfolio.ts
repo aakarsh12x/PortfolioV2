@@ -144,8 +144,8 @@ export const ACHIEVEMENTS = [
 ];
 
 export const STATS = [
-    { icon: Briefcase, value: "1yr+", label: "Industry Exp" },
+    { icon: Briefcase, value: "1.2yr+", label: "Industry Exp" },
     { icon: Users, value: "25k+", label: "Users Impacted" },
     { icon: Star, value: "3", label: "Star CodeChef" },
-    { icon: Code2, value: "700+", label: "DSA Problems Solved" },
+    { icon: Code2, value: "800+", label: "DSA Problems Solved" },
 ];
