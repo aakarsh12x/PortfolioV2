@@ -125,7 +125,7 @@ export const ACHIEVEMENTS = [
     },
     {
         label: "DSA Problems Solved",
-        value: "700+",
+        value: "800+",
         desc: "Across LeetCode, CodeChef, and Codeforces",
         icon: Code2
     },
