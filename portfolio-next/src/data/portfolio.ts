@@ -14,9 +14,9 @@ export const EXPERIENCE = [
         current: true,
         description: "Directed end-to-end development of a mobile dating platform using React Native, Node.js, and MongoDB, implementing geospatial indexing for location-based matching within a 5–100 km radius.",
         metrics: [
-            { value: "5k+ *Growing Rapidly", label: "Active Users" },
-            { value: "<150ms", label: "API Generates Recommendations in" },
-            { value: "2M+", label: "User Engagement On Social Media" },
+            { value: "10k+ *Growing Rapidly", label: "Active Users" },
+            { value: "<200ms", label: "API Generates Recommendations in" },
+            { value: "3M+", label: "User Engagement On Social Media" },
         ],
         tech: ["React Native", "Node.js", "MongoDB", "Express", "Axios", "Tailwind", "Framer Motion"],
     },
@@ -91,22 +91,32 @@ export const SKILLS = [
 
 export const PROJECTS = [
     {
-        title: "Geospatial Social Platform",
-        desc: "Crafted proximity-based content discovery enabling real-time user matching within a selected radius, supporting 1k+ location queries/day. Accelerated spatial queries in PostGIS using batching tuning, achieving 48% faster match performance.",
+        title: "Yuno",
+        desc: "Proximity-based discovery app enabling real-time user matching within a selected radius for 1k+ daily location queries. Optimized spatial indexing in PostGIS using batching to achieve 48% faster match performance.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "PostGIS", "Socket.IO"],
-        url: "https://cherry.date"
+        url: "https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app",
+        image: "/yuno.png"
     },
     {
-        title: "AI Expense Tracker",
-        desc: "Improved prefetching in Next.js, lifting load performance by 40%. Integrated the Gemini API for automated expense classification and budgeting across 1000+ financial transactions with verified accuracy.",
+        title: "Trace",
+        desc: "Engineered a search engine with Puppeteer and FlexSearch, cutting latency from 2.5s to <5ms for 50k+ documents. Integrated LLaMA 3.1 via Vercel AI SDK for real-time synthesized answers, boosting relevance by 40%.",
+        tech: ["TypeScript", "Next.js", "Express", "Puppeteer", "FlexSearch"],
+        url: "https://trace-search-engine-ku6b.vercel.app/",
+        image: "/trace.png"
+    },
+    {
+        title: "Money Map",
+        desc: "Optimized Next.js prefetching to lift application load performance by 40%. Integrated Gemini API for automated, high-accuracy expense classification and budgeting across 1000+ financial transactions.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "Gemini API", "Tailwind"],
-        url: "https://money-map-fnl.vercel.app"
+        url: "https://money-map-fnl.vercel.app",
+        image: "/money-map.png"
     },
     {
         title: "FastQ",
-        desc: "Smart queue management system built to optimize service times and customer flow.",
+        desc: "Smart queue management system designed to optimize service times and streamline customer flow. Features real-time status updates and analytics to enhance overall user experience.",
         tech: ["Next.js", "MongoDB", "Node.js", "Tailwind", "Framer Motion"],
         url: "https://fastq-ichy73kkw-aakarsh12xs-projects.vercel.app",
+        image: "/fastq.png"
     }
 ];
 
@@ -119,14 +129,14 @@ export const ACHIEVEMENTS = [
     },
     {
         label: "DSA Problems Solved",
-        value: "700+",
+        value: "800+",
         desc: "Across LeetCode, CodeChef, and Codeforces",
         icon: Code2
     },
     {
         label: "Startup Growth",
-        value: "5k+",
-        desc: "Scaled Cherry from 0 to 5,000+ users rapidly",
+        value: "10k+",
+        desc: "Scaled Cherry from 0 to 10,000+ users rapidly",
         icon: Rocket
     },
     {
@@ -138,8 +148,8 @@ export const ACHIEVEMENTS = [
 ];
 
 export const STATS = [
-    { icon: Briefcase, value: "1yr+", label: "Industry Exp" },
+    { icon: Briefcase, value: "1.2yr+", label: "Industry Exp" },
     { icon: Users, value: "25k+", label: "Users Impacted" },
     { icon: Star, value: "3", label: "Star CodeChef" },
-    { icon: Code2, value: "700+", label: "DSA Problems Solved" },
+    { icon: Code2, value: "800+", label: "DSA Problems Solved" },
 ];
