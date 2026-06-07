@@ -91,28 +91,32 @@ export const SKILLS = [
 
 export const PROJECTS = [
     {
-        title: "Developer Search Engine",
-        desc: "Engineered a search engine with Puppeteer and FlexSearch, cutting latency from 2.5s to <5ms for 50k+ documents. Integrated LLaMA 3.1 via Vercel AI SDK for real-time synthesized answers, boosting relevance by 40%.",
-        tech: ["TypeScript", "Next.js", "Express", "Puppeteer", "FlexSearch"],
-        url: "https://trace-search-engine-ku6b.vercel.app/"
-    },
-    {
-        title: "Geospatial Social Platform",
+        title: "Yuno",
         desc: "Proximity-based discovery app enabling real-time user matching within a selected radius for 1k+ daily location queries. Optimized spatial indexing in PostGIS using batching to achieve 48% faster match performance.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "PostGIS", "Socket.IO"],
-        url: "https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app"
+        url: "https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app",
+        image: "/yuno.png"
     },
     {
-        title: "AI Expense Tracker",
+        title: "Trace",
+        desc: "Engineered a search engine with Puppeteer and FlexSearch, cutting latency from 2.5s to <5ms for 50k+ documents. Integrated LLaMA 3.1 via Vercel AI SDK for real-time synthesized answers, boosting relevance by 40%.",
+        tech: ["TypeScript", "Next.js", "Express", "Puppeteer", "FlexSearch"],
+        url: "https://trace-search-engine-ku6b.vercel.app/",
+        image: "/trace.png"
+    },
+    {
+        title: "Money Map",
         desc: "Optimized Next.js prefetching to lift application load performance by 40%. Integrated Gemini API for automated, high-accuracy expense classification and budgeting across 1000+ financial transactions.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "Gemini API", "Tailwind"],
-        url: "https://money-map-fnl.vercel.app"
+        url: "https://money-map-fnl.vercel.app",
+        image: "/money-map.png"
     },
     {
         title: "FastQ",
         desc: "Smart queue management system designed to optimize service times and streamline customer flow. Features real-time status updates and analytics to enhance overall user experience.",
         tech: ["Next.js", "MongoDB", "Node.js", "Tailwind", "Framer Motion"],
         url: "https://fastq-ichy73kkw-aakarsh12xs-projects.vercel.app",
+        image: "/fastq.png"
     }
 ];
 

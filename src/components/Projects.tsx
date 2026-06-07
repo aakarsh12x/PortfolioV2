@@ -7,6 +7,14 @@ import { ScrollReveal } from "./ui/ScrollReveal";
 export const Projects = () => {
     return (
         <section id="projects" className="py-6 lg:py-12 overflow-hidden" style={{ backgroundColor: "var(--bg-card)" }}>
+            <style>{`
+                .project-card-link .project-image {
+                    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .project-card-link:hover .project-image {
+                    transform: scale(1.12);
+                }
+            `}</style>
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
 
                 {/* Header */}
@@ -17,39 +25,66 @@ export const Projects = () => {
                     </ScrollReveal>
                 </div>
 
-                {/* List */}
-                <div className="flex flex-col">
+                {/* Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
                     {PROJECTS.map((project, i) => (
-                        <ScrollReveal key={i} variant={i % 2 === 0 ? "slide-left" : "slide-right"} delay={0.1} className="w-full">
+                        <ScrollReveal key={i} variant="slide-up" delay={i * 0.05} className="w-full">
                             <a
                                 href={project.url || "#"}
                                 target={project.url ? "_blank" : "_self"}
                                 rel={project.url ? "noopener noreferrer" : ""}
-                                className="group block py-4 lg:py-7 transition-colors lg:cursor-none"
-                                style={{ borderTop: "1px solid var(--border)" }}
-                                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "var(--surface-1)")}
-                                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+                                className="group project-card-link flex flex-row items-center gap-4 p-3.5 rounded-xl border transition-all duration-500 lg:cursor-none"
+                                style={{ 
+                                    borderColor: "var(--border)",
+                                    backgroundColor: "var(--surface-1)"
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.backgroundColor = "var(--surface-2)";
+                                    e.currentTarget.style.borderColor = "var(--accent)";
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.backgroundColor = "var(--surface-1)";
+                                    e.currentTarget.style.borderColor = "var(--border)";
+                                }}
                             >
-                                <div className="flex items-center justify-between gap-4 mb-2 lg:mb-3">
-                                    <h3 className="text-lg lg:text-3xl font-black tracking-tight transition-colors" style={{ color: "var(--text-primary)" }}
-                                        onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
-                                        onMouseLeave={e => (e.currentTarget.style.color = "var(--text-primary)")}
-                                    >
-                                        {project.title}
-                                    </h3>
-                                    {project.url && (
-                                        <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-all duration-500 flex-shrink-0" style={{ color: "var(--text-ghost)" }} />
-                                    )}
-                                </div>
+                                {/* Image Container */}
+                                {/* @ts-ignore */}
+                                {project.image && (
+                                    <div className="w-24 sm:w-32 md:w-36 lg:w-40 aspect-video flex-shrink-0 overflow-hidden rounded-lg border" style={{ borderColor: "var(--border)" }}>
+                                        {/* @ts-ignore */}
+                                        <img 
+                                            src={project.image} 
+                                            alt={project.title} 
+                                            className="project-image w-full h-full object-cover" 
+                                        />
+                                    </div>
+                                )}
+                                
+                                {/* Info Container */}
+                                <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                                    <div>
+                                        <div className="flex items-center justify-between gap-2 mb-1">
+                                            <h3 className="text-base lg:text-lg font-black tracking-tight transition-colors truncate" style={{ color: "var(--text-primary)" }}
+                                                onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                                                onMouseLeave={e => (e.currentTarget.style.color = "var(--text-primary)")}
+                                            >
+                                                {project.title}
+                                            </h3>
+                                            {project.url && (
+                                                <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-all duration-500 flex-shrink-0" style={{ color: "var(--text-ghost)" }} />
+                                            )}
+                                        </div>
 
-                                <div className="flex flex-col lg:flex-row justify-between lg:items-end gap-3 lg:gap-6">
-                                    <p className="text-sm lg:text-base max-w-xl leading-relaxed" style={{ color: "var(--text-muted)" }}>
-                                        {project.desc}
-                                    </p>
-                                    <div className="flex flex-wrap gap-3">
+                                        <p className="text-xs lg:text-sm leading-relaxed line-clamp-2" style={{ color: "var(--text-muted)" }}>
+                                            {project.desc}
+                                        </p>
+                                    </div>
+
+                                    {/* Tech Tags */}
+                                    <div className="flex flex-wrap gap-1.5 mt-2">
                                         {project.tech.map((t) => (
-                                            <span key={t} className="px-3 py-1 rounded-full text-[10px] uppercase tracking-wider transition-colors"
-                                                style={{ border: "1px solid var(--border)", color: "var(--text-faint)" }}>
+                                            <span key={t} className="px-2 py-0.5 rounded-full text-[9px] uppercase tracking-wider transition-colors"
+                                                style={{ border: "1px solid var(--border)", color: "var(--text-faint)", backgroundColor: "var(--bg-subtle)" }}>
                                                 {t}
                                             </span>
                                         ))}
