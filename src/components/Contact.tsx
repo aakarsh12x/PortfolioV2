@@ -21,8 +21,6 @@ export const Contact = () => (
             <nav className="contact-links" aria-label="Social links">
                 <a href="https://github.com/aakarsh12x" target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight aria-hidden="true" /></a>
                 <a href="https://www.linkedin.com/in/aakarsh-singh-b27a5228b/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight aria-hidden="true" /></a>
-                <a href="https://wa.me/918739018155" target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight aria-hidden="true" /></a>
-                <a href="tel:+918739018155">Call <ArrowUpRight aria-hidden="true" /></a>
             </nav>
         </div>
     </section>
