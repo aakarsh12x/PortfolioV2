@@ -94,7 +94,7 @@ export const PROJECTS = [
         title: "Yuno",
         desc: "Proximity-based discovery app enabling real-time user matching within a selected radius for 1k+ daily location queries. Optimized spatial indexing in PostGIS using batching to achieve 48% faster match performance.",
         tech: ["Next.js", "Node.js", "PostgreSQL", "PostGIS", "Socket.IO"],
-        url: "https://frontend-6sa6005p4-aakarsh12xs-projects.vercel.app",
+        url: "https://frontend-nine-orcin-70.vercel.app/",
         image: "/yuno.png"
     },
     {
