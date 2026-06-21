@@ -1,6 +1,5 @@
 "use client";
 
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Experience } from "@/components/Experience";
@@ -12,8 +11,10 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white min-h-screen antialiased selection:bg-[#ff4d00] selection:text-black lg:cursor-none">
-      <CustomCursor />
+    <main
+      className="min-h-screen antialiased lg:cursor-none"
+      style={{ backgroundColor: "var(--bg-primary)", color: "var(--text-primary)" }}
+    >
       <Navbar />
       <Hero />
       <Experience />
