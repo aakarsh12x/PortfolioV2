@@ -12,10 +12,10 @@ const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState<Theme>("light");
+    const [theme, setTheme] = useState<Theme>("dark");
 
     useEffect(() => {
-        const stored = (localStorage.getItem("theme") as Theme | null) ?? "light";
+        const stored = (localStorage.getItem("theme") as Theme | null) ?? "dark";
         setTheme(stored);
         document.documentElement.classList.toggle("light", stored === "light");
     }, []);
