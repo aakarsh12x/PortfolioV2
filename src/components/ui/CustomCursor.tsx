@@ -81,7 +81,7 @@ export const CustomCursor = () => {
             {/* Central dot — uses CSS variable directly, no JS color tracking needed */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9999]"
-                style={{ x: cursorXSpring, y: cursorYSpring,  }}
+                style={{ x: cursorXSpring, y: cursorYSpring, mixBlendMode: "difference" }}
             >
                 <motion.div
                     className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -101,7 +101,7 @@ export const CustomCursor = () => {
             {/* Trailing ring */}
             <motion.div
                 className="fixed top-0 left-0 pointer-events-none z-[9998]"
-                style={{ x: delayedX, y: delayedY,  }}
+                style={{ x: delayedX, y: delayedY, mixBlendMode: "difference" }}
             >
                 <motion.div
                     className="relative -translate-x-1/2 -translate-y-1/2 rounded-full"
