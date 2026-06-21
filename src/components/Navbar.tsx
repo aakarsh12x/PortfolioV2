@@ -1,133 +1,213 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
+import { ArrowUpRight, X } from "lucide-react";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const NAV_LINKS = [
+    { label: "Experience", href: "#experience" },
+    { label: "Projects",   href: "#projects"   },
+    { label: "Skills",     href: "#skills"      },
+    { label: "Contact",    href: "#contact"     },
+];
 
 export const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { theme, toggle } = useTheme();
+    const [scrolled,  setScrolled]  = useState(false);
+    const [progress,  setProgress]  = useState(0);
+    const [isOpen,    setIsOpen]    = useState(false);
+    const { theme, toggle }         = useTheme();
+    const reduceMotion              = useSafeReducedMotion();
 
-    const menuVariants = {
-        closed: {
-            opacity: 0,
-            y: "-100%",
-            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as any }
-        },
-        open: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as any }
+    useEffect(() => {
+        const onScroll = () => {
+            const y = window.scrollY;
+            setScrolled(y > 32);
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            setProgress(max > 0 ? Math.min((y / max) * 100, 100) : 0);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [isOpen]);
+
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const id = href.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 64; // Height of fixed navbar
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+            
+            // Update URL hash without standard jump
+            window.history.pushState(null, "", href);
         }
     };
 
-    const linkVariants = {
-        closed: { y: 20, opacity: 0 },
-        open: (i: number) => ({
-            y: 0,
-            opacity: 1,
-            transition: { delay: 0.3 + (i * 0.1), duration: 0.4, ease: "easeOut" as any }
-        })
-    };
-
     return (
-        <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b"
-            style={{ backgroundColor: "color-mix(in srgb, var(--bg-primary) 90%, transparent)", borderColor: "var(--border-subtle)" }}
-        >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32 py-6 flex justify-between items-center relative z-50">
-                <span className="text-xl font-black relative z-50">
-                    <span style={{ color: "var(--accent)" }}>A</span>S<span style={{ color: "var(--accent)" }}>.</span>
-                </span>
+        <>
+            <motion.header
+                className={`nav-bar${scrolled ? " nav-bar--scrolled" : ""}`}
+                initial={reduceMotion ? false : { y: -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.75, ease: EASE }}
+                role="banner"
+            >
+                {/* Wordmark */}
+                <a href="#home" className="nav-wordmark" aria-label="Aakarsh Singh — home">
+                    <span className="nav-wordmark__mark">
+                        AS<span aria-hidden="true">.</span>
+                    </span>
+                    <span className="nav-wordmark__badge" aria-hidden="true">
+                        <span className="nav-wordmark__dot" />
+                        Open
+                    </span>
+                </a>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-10">
-                    {["Experience", "Projects", "Skills", "Contact"].map((item) => (
-                        <a key={item} href={`#${item.toLowerCase()}`}
-                            className="text-xs tracking-[0.2em] uppercase transition-colors lg:cursor-none"
-                            style={{ color: "var(--text-muted)" }}
-                            onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
-                            onMouseLeave={e => (e.currentTarget.style.color = "var(--text-muted)")}
+                {/* Desktop links — rolling text */}
+                <nav className="nav-links" aria-label="Primary navigation">
+                    {NAV_LINKS.map(({ label, href }) => (
+                        <a
+                            key={href}
+                            href={href}
+                            className="nav-link"
+                            aria-label={label}
+                            onClick={(e) => handleScroll(e, href)}
                         >
-                            {item}
+                            <span className="nav-link__roll" aria-hidden="true">
+                                <span>{label}</span>
+                                <span>{label}</span>
+                            </span>
                         </a>
                     ))}
+                </nav>
 
-                    {/* Theme Toggle */}
+                {/* Right cluster */}
+                <div className="nav-actions">
+                    {/* CTA — slide-fill pill */}
+                    <a
+                        href="#contact"
+                        className="nav-cta"
+                        aria-label="Let's talk"
+                        onClick={(e) => handleScroll(e, "#contact")}
+                    >
+                        <span aria-hidden="true">Let&apos;s talk</span>
+                        <span className="nav-cta__arrow" aria-hidden="true">
+                            <ArrowUpRight className="w-3 h-3" />
+                        </span>
+                    </a>
+
+                    {/* Theme toggle switch */}
                     <button
                         onClick={toggle}
-                        aria-label="Toggle theme"
-                        className="w-8 h-8 flex items-center justify-center rounded-full border transition-all lg:cursor-none hover:scale-110"
-                        style={{ borderColor: "var(--border)", color: "var(--text-muted)", backgroundColor: "var(--surface-2)" }}
+                        className={`nav-toggle${theme === "light" ? " nav-toggle--light" : ""}`}
+                        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                        aria-pressed={theme === "light"}
                     >
-                        {theme === "dark"
-                            ? <Sun className="w-3.5 h-3.5" />
-                            : <Moon className="w-3.5 h-3.5" />
-                        }
+                        <span className="nav-toggle__thumb" />
+                    </button>
+
+                    {/* Mobile hamburger */}
+                    <button
+                        className="nav-burger"
+                        onClick={() => setIsOpen(true)}
+                        aria-label="Open navigation menu"
+                        aria-expanded={isOpen}
+                    >
+                        <span /><span /><span />
                     </button>
                 </div>
 
-                {/* Mobile right side */}
-                <div className="md:hidden flex items-center gap-3 relative z-50">
-                    <button
-                        onClick={toggle}
-                        aria-label="Toggle theme"
-                        className="w-8 h-8 flex items-center justify-center rounded-full border transition-all"
-                        style={{ borderColor: "var(--border)", color: "var(--text-muted)", backgroundColor: "var(--surface-2)" }}
-                    >
-                        {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-                    </button>
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="p-2 -mr-2 lg:cursor-none"
-                        style={{ color: "var(--text-primary)" }}
-                        aria-label="Toggle menu"
-                    >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
-                </div>
-            </div>
+                {/* Scroll progress bar */}
+                <div
+                    className="nav-progress"
+                    style={{ width: `${progress}%` }}
+                    role="progressbar"
+                    aria-valuenow={Math.round(progress)}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label="Page scroll progress"
+                />
+            </motion.header>
 
-            {/* Mobile Fullscreen Menu */}
+            {/* Mobile overlay */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                        variants={menuVariants}
-                        className="fixed inset-0 backdrop-blur-3xl flex flex-col justify-center items-center z-[60] md:hidden"
-                        style={{ backgroundColor: "color-mix(in srgb, var(--bg-primary) 96%, transparent)", height: "100dvh" }}
+                        className="nav-overlay"
+                        initial={reduceMotion ? { opacity: 1 } : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+                        animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+                        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+                        transition={{ duration: 0.55, ease: EASE }}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Navigation menu"
                     >
-                        <div className="absolute top-6 right-6">
-                            <button onClick={() => setIsOpen(false)} className="p-2" style={{ color: "var(--text-primary)" }}>
-                                <X className="w-8 h-8" />
-                            </button>
-                        </div>
+                        <button
+                            className="nav-overlay__close"
+                            onClick={() => setIsOpen(false)}
+                            aria-label="Close navigation menu"
+                        >
+                            <X className="w-4 h-4" aria-hidden="true" />
+                        </button>
 
-                        <div className="flex flex-col gap-8 text-center">
-                            {["Experience", "Projects", "Skills", "Contact"].map((item, i) => (
-                                <motion.div key={item} custom={i} variants={linkVariants}>
+                        <span className="nav-overlay__wordmark" aria-hidden="true">
+                            AS<span>.</span>
+                        </span>
+
+                        <nav className="nav-overlay__links" aria-label="Mobile navigation">
+                            {NAV_LINKS.map(({ label, href }, i) => (
+                                <motion.div
+                                    key={href}
+                                    className="nav-overlay__item"
+                                    initial={reduceMotion ? false : { opacity: 0, x: -40 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.45, delay: 0.15 + i * 0.07, ease: EASE }}
+                                >
                                     <a
-                                        href={`#${item.toLowerCase()}`}
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-5xl font-black tracking-tighter block py-2 transition-colors"
-                                        style={{ color: "var(--text-primary)" }}
-                                        onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
-                                        onMouseLeave={e => (e.currentTarget.style.color = "var(--text-primary)")}
+                                        href={href}
+                                        className="nav-overlay__link"
+                                        onClick={(e) => {
+                                            setIsOpen(false);
+                                            handleScroll(e, href);
+                                        }}
                                     >
-                                        {item}
+                                        <span className="nav-overlay__num" aria-hidden="true">
+                                            {String(i + 1).padStart(2, "0")}
+                                        </span>
+                                        {label}
                                     </a>
                                 </motion.div>
                             ))}
+                        </nav>
+
+                        <div className="nav-overlay__footer">
+                            <a href="mailto:singhaakarsh28@gmail.com" className="nav-overlay__email">
+                                singhaakarsh28@gmail.com
+                            </a>
+                            <button onClick={toggle} className="nav-overlay__theme"
+                                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
+                                {theme === "dark" ? "Light mode" : "Dark mode"}
+                            </button>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </>
     );
 };
