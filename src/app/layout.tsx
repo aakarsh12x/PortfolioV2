@@ -5,6 +5,7 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import JsonLd from "@/components/JsonLd";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SpotlightGrid } from "@/components/ui/SpotlightGrid";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -103,13 +104,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="dark">
       <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased lg:cursor-none`}>
         <ThemeProvider>
           <CustomCursor />
           <ScrollProgress />
           <div className="noise" />
-          <div className="grid-overlay" />
+          <SpotlightGrid />
           <JsonLd />
           {children}
         </ThemeProvider>
