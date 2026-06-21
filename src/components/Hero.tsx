@@ -67,7 +67,7 @@ export const Hero = () => {
                     <motion.div className="hero-intro" initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.75, ease: EASE }}>
                         <p>Founding engineer and product-minded builder turning raw ideas into fast, resilient software—from the first commit to the first <strong>25,000 users.</strong></p>
                         <div className="hero-actions">
-                            <Magnetic><a href="#projects" className="hero-action hero-action--primary">View selected work <ArrowDownRight aria-hidden="true" /></a></Magnetic>
+                            <Magnetic><a href="#experience" className="hero-action hero-action--primary">Selected experience <ArrowDownRight aria-hidden="true" /></a></Magnetic>
                             <Magnetic><a href="#contact" className="hero-action hero-action--text">Discuss a role <ArrowUpRight aria-hidden="true" /></a></Magnetic>
                         </div>
                     </motion.div>
@@ -77,7 +77,7 @@ export const Hero = () => {
                     <p><strong>Founding engineer</strong><span>Cherry Dating</span></p>
                     <p><strong>25k+ users</strong><span>across shipped products</span></p>
                     <p><strong>800+ problems</strong><span>solved with intent</span></p>
-                    <a href="#experience">Selected experience <ArrowDownRight aria-hidden="true" /></a>
+                    <a href="#projects">Selected work <ArrowDownRight aria-hidden="true" /></a>
                 </motion.div>
             </div>
         </section>
