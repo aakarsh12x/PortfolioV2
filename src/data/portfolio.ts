@@ -110,13 +110,6 @@ export const PROJECTS = [
         tech: ["Next.js", "Node.js", "PostgreSQL", "Gemini API", "Tailwind"],
         url: "https://money-map-fnl.vercel.app",
         image: "/money-map.png"
-    },
-    {
-        title: "FastQ",
-        desc: "Smart queue management system designed to optimize service times and streamline customer flow. Features real-time status updates and analytics to enhance overall user experience.",
-        tech: ["Next.js", "MongoDB", "Node.js", "Tailwind", "Framer Motion"],
-        url: "https://fastq-ichy73kkw-aakarsh12xs-projects.vercel.app",
-        image: "/fastq.png"
     }
 ];
 
