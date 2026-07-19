@@ -17,7 +17,6 @@ const NAV_LINKS = [
 
 export const Navbar = () => {
     const [scrolled,  setScrolled]  = useState(false);
-    const [progress,  setProgress]  = useState(0);
     const [isOpen,    setIsOpen]    = useState(false);
     const { theme, toggle }         = useTheme();
     const reduceMotion              = useSafeReducedMotion();
@@ -26,8 +25,6 @@ export const Navbar = () => {
         const onScroll = () => {
             const y = window.scrollY;
             setScrolled(y > 32);
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            setProgress(max > 0 ? Math.min((y / max) * 100, 100) : 0);
         };
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
@@ -132,17 +129,6 @@ export const Navbar = () => {
                         <span /><span /><span />
                     </button>
                 </div>
-
-                {/* Scroll progress bar */}
-                <div
-                    className="nav-progress"
-                    style={{ width: `${progress}%` }}
-                    role="progressbar"
-                    aria-valuenow={Math.round(progress)}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label="Page scroll progress"
-                />
             </motion.header>
 
             {/* Mobile overlay */}

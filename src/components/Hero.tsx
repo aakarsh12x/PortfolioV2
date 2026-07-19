@@ -4,8 +4,14 @@ import Image from "next/image";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import type { MouseEvent } from "react";
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Magnetic } from "./ui/Magnetic";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const lineVariants = {
@@ -15,6 +21,7 @@ const lineVariants = {
 
 export const Hero = () => {
     const reduceMotion = useSafeReducedMotion();
+    const sectionRef = useRef<HTMLElement>(null);
     const portraitX = useMotionValue(0);
     const portraitY = useMotionValue(0);
     const smoothX = useSpring(portraitX, { stiffness: 110, damping: 20, mass: 0.6 });
@@ -28,30 +35,103 @@ export const Hero = () => {
     };
     const resetPortrait = () => { portraitX.set(0); portraitY.set(0); };
 
+    // GSAP scroll-driven parallax
+    useGSAP(
+        () => {
+            if (reduceMotion || !sectionRef.current) return;
+
+            // Portrait parallax - moves up slightly as user scrolls
+            const portrait = sectionRef.current.querySelector(".hero-portrait");
+            if (portrait) {
+                gsap.to(portrait, {
+                    y: -60,
+                    scale: 0.95,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1.5,
+                    },
+                });
+            }
+
+            // Proof bar - slides up with slight parallax delay
+            const proofBar = sectionRef.current.querySelector(".hero-proof");
+            if (proofBar) {
+                gsap.to(proofBar, {
+                    y: -30,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "60% top",
+                        end: "bottom top",
+                        scrub: 1,
+                    },
+                });
+            }
+
+            // Hero title - slow parallax offset on scroll
+            const title = sectionRef.current.querySelector(".hero-title");
+            if (title) {
+                gsap.to(title, {
+                    y: -40,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "30% top",
+                        end: "bottom top",
+                        scrub: 2,
+                    },
+                });
+            }
+
+            // Crosshair - drift away on scroll
+            const crosshair = sectionRef.current.querySelector(".hero-crosshair-float");
+            if (crosshair) {
+                gsap.to(crosshair, {
+                    y: -80,
+                    x: 30,
+                    opacity: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "30% top",
+                        end: "80% top",
+                        scrub: 1,
+                    },
+                });
+            }
+        },
+        { scope: sectionRef, dependencies: [reduceMotion] }
+    );
+
     return (
-        <section id="home" className="hero-stage" aria-labelledby="hero-title" onMouseMove={movePortrait} onMouseLeave={resetPortrait}>
+        <section ref={sectionRef} id="home" className="hero-stage" aria-labelledby="hero-title" onMouseMove={movePortrait} onMouseLeave={resetPortrait}>
             <div className="hero-stage__wash" aria-hidden="true" />
             <div className="hero-shell">
                 <motion.div className="hero-meta" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
                     <p className="hero-availability"><span aria-hidden="true" />Open to SDE roles</p>
-                    <p className="hero-coordinate">Full-stack engineer · India · 2026</p>
+                    <p className="hero-coordinate">Full-stack engineer / India / 2026</p>
                 </motion.div>
 
                 <div className="hero-composition">
                     <motion.figure className="hero-portrait"
-                        initial={reduceMotion ? false : { opacity: 0, clipPath: "inset(100% 0 0 0)" }}
-                        animate={{ opacity: 1, clipPath: "inset(0% 0 0 0)" }}
+                        initial={reduceMotion ? false : { opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{ duration: 1.1, delay: 0.2, ease: EASE }}>
                         <div className="hero-portrait__offset" aria-hidden="true" />
-                        <motion.div className="hero-portrait__frame" style={{ x: smoothX, y: smoothY }}>
+                        <motion.div className="hero-portrait__frame" style={{ x: smoothX, y: smoothY }}
+                            initial={reduceMotion ? false : { clipPath: "inset(100% 0 0 0)" }}
+                            animate={{ clipPath: "inset(0% 0 0 0)" }}
+                            transition={{ duration: 1.1, delay: 0.2, ease: EASE }}>
                             <Image src="/profile.jpg" alt="Aakarsh Singh in profile" fill priority sizes="(max-width: 768px) 82vw, 42vw" className="hero-portrait__image" />
                             <div className="hero-portrait__tone" aria-hidden="true" />
                             <div className="hero-portrait__scan" aria-hidden="true" />
                         </motion.div>
                         <motion.div className="hero-crosshair-float" initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
                             animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1, ease: EASE }} aria-hidden="true">
-                            <motion.div className="hero-crosshair" animate={reduceMotion ? undefined : { rotate: 360 }}
-                                transition={{ duration: 24, repeat: Infinity, ease: "linear" }}><span /><i /></motion.div>
+                            <div className="hero-crosshair"><span /><i /></div>
                         </motion.div>
                         <div className="hero-portrait__stamp" aria-hidden="true"><span>Product</span><span>Systems</span><span>Scale</span></div>
                         <figcaption>Aakarsh Singh / Founding engineer</figcaption>
@@ -65,7 +145,7 @@ export const Hero = () => {
                     </h1>
 
                     <motion.div className="hero-intro" initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.75, ease: EASE }}>
-                        <p>Founding engineer and product-minded builder turning raw ideas into fast, resilient software—from the first commit to the first <strong>25,000 users.</strong></p>
+                        <p>Founding engineer and product-minded builder turning raw ideas into fast, resilient software - from the first commit to the first <strong>25,000 users.</strong></p>
                         <div className="hero-actions">
                             <Magnetic><a href="#experience" className="hero-action hero-action--primary">Selected experience <ArrowDownRight aria-hidden="true" /></a></Magnetic>
                             <Magnetic><a href="#contact" className="hero-action hero-action--text">Discuss a role <ArrowUpRight aria-hidden="true" /></a></Magnetic>

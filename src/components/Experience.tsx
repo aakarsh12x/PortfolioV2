@@ -1,71 +1,197 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { COLLEGE_EXPERIENCE, EXPERIENCE } from "@/data/portfolio";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const ExperienceRow = ({ job, index }: { job: (typeof EXPERIENCE)[number]; index: number }) => {
-    const ref = useRef<HTMLElement>(null);
-    const inView = useInView(ref, { once: true, amount: 0.18 });
-    const reduceMotion = useSafeReducedMotion();
-
-    return (
-        <motion.article ref={ref} className={`experience-role${job.current ? " experience-role--current" : ""}`}
-            initial={reduceMotion ? false : { opacity: 0, y: 42 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.75, delay: index * 0.06, ease: EASE }}>
-            <div className="experience-role__rail">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{job.period}</p>
-            </div>
-
-            <div className="experience-role__story">
-                <div className="experience-role__identity">
-                    <p>{job.current ? "Building now" : job.location}</p>
-                    <h3>{job.role}</h3>
-                    {job.url ? (
-                        <a href={job.url} target="_blank" rel="noopener noreferrer">{job.company} <ArrowUpRight aria-hidden="true" /></a>
-                    ) : <strong>{job.company}</strong>}
-                </div>
-
-                <div className="experience-role__brief">
-                    <p>{job.description}</p>
-                    <ul aria-label={`Technologies used at ${job.company}`}>
-                        {job.tech.map((technology) => <li key={technology}>{technology}</li>)}
-                    </ul>
-                </div>
-            </div>
-
-            <dl className="experience-role__impact" aria-label={`${job.company} outcomes`}>
-                {job.metrics.map((metric) => (
-                    <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>
-                ))}
-            </dl>
-        </motion.article>
-    );
-};
+gsap.registerPlugin(ScrollTrigger);
 
 export const Experience = () => {
-    const headingRef = useRef<HTMLDivElement>(null);
-    const headingInView = useInView(headingRef, { once: true, amount: 0.35 });
+    const sectionRef = useRef<HTMLElement>(null);
+    const headingRef = useRef<HTMLElement>(null);
     const reduceMotion = useSafeReducedMotion();
 
+    useGSAP(
+        () => {
+            if (reduceMotion || !sectionRef.current) return;
+
+            // Heading entrance
+            const heading = headingRef.current;
+            if (heading) {
+                gsap.from(heading, {
+                    y: 60,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: heading,
+                        start: "top 85%",
+                        end: "top 50%",
+                        toggleActions: "play none none none",
+                    },
+                });
+            }
+
+            // Each experience role - stagger entrance
+            const roles = gsap.utils.toArray<HTMLElement>(".experience-role");
+            roles.forEach((role, i) => {
+                gsap.from(role, {
+                    y: 80,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: role,
+                        start: "top 88%",
+                        end: "top 55%",
+                        toggleActions: "play none none none",
+                    },
+                });
+
+                // Animate the metric values with a count-up effect
+                const metricValues = role.querySelectorAll<HTMLElement>(".experience-role__impact dd");
+                metricValues.forEach((dd) => {
+                    const text = dd.textContent || "";
+                    gsap.from(dd, {
+                        textContent: 0,
+                        duration: 1.5,
+                        delay: 0.3,
+                        ease: "power2.out",
+                        snap: { textContent: 1 },
+                        scrollTrigger: {
+                            trigger: dd,
+                            start: "top 90%",
+                            toggleActions: "play none none none",
+                        },
+                        onComplete: () => {
+                            dd.textContent = text; // Restore original text with symbols
+                        },
+                    });
+                });
+
+                // Rail number scale-in
+                const railNum = role.querySelector(".experience-role__rail > span");
+                if (railNum) {
+                    gsap.from(railNum, {
+                        scale: 0,
+                        opacity: 0,
+                        duration: 0.6,
+                        delay: 0.15,
+                        ease: "back.out(1.7)",
+                        scrollTrigger: {
+                            trigger: role,
+                            start: "top 85%",
+                            toggleActions: "play none none none",
+                        },
+                    });
+                }
+            });
+
+            // Community section - slide in
+            const communityHeading = sectionRef.current.querySelector(".experience-community__heading");
+            const communityRoles = sectionRef.current.querySelector(".experience-community__roles");
+            if (communityHeading) {
+                gsap.from(communityHeading, {
+                    x: -60,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: communityHeading,
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                    },
+                });
+            }
+            if (communityRoles) {
+                const articles = communityRoles.querySelectorAll("article");
+                articles.forEach((article, i) => {
+                    gsap.from(article, {
+                        x: 50,
+                        opacity: 0,
+                        duration: 0.7,
+                        delay: i * 0.12,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: communityRoles,
+                            start: "top 85%",
+                            toggleActions: "play none none none",
+                        },
+                    });
+                });
+            }
+        },
+        { scope: sectionRef, dependencies: [reduceMotion] }
+    );
+
     return (
-        <section id="experience" className="experience-section" aria-labelledby="experience-title">
+        <section
+            ref={sectionRef}
+            id="experience"
+            className="experience-section"
+            aria-labelledby="experience-title"
+        >
             <div className="experience-shell">
-                <motion.header ref={headingRef} className="experience-heading"
-                    initial={reduceMotion ? false : { opacity: 0, y: 36 }} animate={headingInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, ease: EASE }}>
-                    <p className="experience-heading__label">Selected experience · 2025—Now</p>
+                <header ref={headingRef} className="experience-heading">
+                    <p className="experience-heading__label">Selected experience</p>
                     <h2 id="experience-title">Work that survived contact with reality.</h2>
-                    <p className="experience-heading__intro">I like the part after the prototype: real users, real constraints, and systems that still have to feel fast on a bad connection.</p>
-                </motion.header>
+                    <p className="experience-heading__intro">
+                        I like the part after the prototype: real users, real constraints,
+                        and systems that still have to feel fast on a bad connection.
+                    </p>
+                </header>
 
                 <div className="experience-ledger">
-                    {EXPERIENCE.map((job, index) => <ExperienceRow key={job.id} job={job} index={index} />)}
+                    {EXPERIENCE.map((job, index) => (
+                        <article
+                            key={job.id}
+                            className={`experience-role${job.current ? " experience-role--current" : ""}`}
+                        >
+                            <div className="experience-role__rail">
+                                <span>{String(index + 1).padStart(2, "0")}</span>
+                                <p>{job.period}</p>
+                            </div>
+
+                            <div className="experience-role__story">
+                                <div className="experience-role__identity">
+                                    <p>{job.current ? "Building now" : job.location}</p>
+                                    <h3>{job.role}</h3>
+                                    {job.url ? (
+                                        <a href={job.url} target="_blank" rel="noopener noreferrer">
+                                            {job.company} <ArrowUpRight aria-hidden="true" />
+                                        </a>
+                                    ) : (
+                                        <strong>{job.company}</strong>
+                                    )}
+                                </div>
+
+                                <div className="experience-role__brief">
+                                    <p>{job.description}</p>
+                                    <ul aria-label={`Technologies used at ${job.company}`}>
+                                        {job.tech.map((technology) => (
+                                            <li key={technology}>{technology}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <dl
+                                className="experience-role__impact"
+                                aria-label={`${job.company} outcomes`}
+                            >
+                                {job.metrics.map((metric) => (
+                                    <div key={metric.label}>
+                                        <dt>{metric.label}</dt>
+                                        <dd>{metric.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        </article>
+                    ))}
                 </div>
 
                 <div className="experience-community">
@@ -77,7 +203,10 @@ export const Experience = () => {
                         {COLLEGE_EXPERIENCE.map((role) => (
                             <article key={`${role.role}-${role.organization}`}>
                                 <role.icon aria-hidden="true" />
-                                <div><h4>{role.role}</h4><p>{role.organization}</p></div>
+                                <div>
+                                    <h4>{role.role}</h4>
+                                    <p>{role.organization}</p>
+                                </div>
                                 <span>{role.period}</span>
                             </article>
                         ))}

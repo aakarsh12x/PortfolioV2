@@ -16,7 +16,7 @@ export const EXPERIENCE = [
         metrics: [
             { value: "10k+", label: "Monthly Active Users" },
             { value: "+35%", label: "Matches per User" },
-            { value: "-60%", label: "AWS Infrastructure Costs" },
+            { value: "-60%", label: "AWS Bills" },
         ],
         tech: ["React Native", "Node.js", "MongoDB", "Express", "Axios", "Tailwind", "Framer Motion"],
     },
