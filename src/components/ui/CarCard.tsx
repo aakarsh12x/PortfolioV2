@@ -6,14 +6,18 @@ import { ArrowRight } from "lucide-react";
 export const CarCard = () => {
     // Mobile tap-to-move state
     const [isAccelerating, setIsAccelerating] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
+    const isMovingFast = isAccelerating || isHovered;
 
     return (
         <div
             className={`car-card-wrapper ${isAccelerating ? 'is-accelerating' : ''}`}
             onClick={() => setIsAccelerating(prev => !prev)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             <div className="car-card">
-                <div className="car-card__glow" aria-hidden="true" />
                 <div className="car-card__content">
                     <span className="car-card__label">Continuous Delivery</span>
                     <h3>Shipped with speed &amp; precision.</h3>
@@ -63,14 +67,12 @@ export const CarCard = () => {
                                 />
 
                                 {/* Sleek Dark Canopy (Windows) */}
-                                <path
-                                    d="M82,20 C110,20 145,28 165,36 L150,38 L80,38 L65,34 Z"
-                                    fill="var(--bg-primary)"
-                                    opacity="0.9"
-                                />
+                                <path d="M75,35 L110,24 L145,26 L165,37 Z" fill="#090909" stroke="var(--bg-primary)" strokeWidth="1.5" />
+                                <path d="M112,24 L110,35 L145,35 L145,26 Z" fill="#090909" stroke="var(--bg-primary)" strokeWidth="1" />
+                                
                                 {/* Window Reflection Highlight */}
                                 <path d="M85,22 C105,22 135,29 155,35" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-
+                                
                                 {/* Detail Lines (Door, Side Skirt) */}
                                 <path d="M75,50 L165,50" fill="none" stroke="var(--bg-primary)" strokeWidth="1" opacity="0.4" />
                                 <path d="M120,38 L110,50" fill="none" stroke="var(--bg-primary)" strokeWidth="1" opacity="0.4" />
@@ -88,7 +90,7 @@ export const CarCard = () => {
                                 {/* Tire & Rim Border */}
                                 <circle cx="0" cy="0" r="14" fill="#090909" stroke="var(--text-dim)" strokeWidth="0.5" />
                                 <circle cx="0" cy="0" r="10" fill="transparent" stroke="#333" strokeWidth="1.5" />
-
+                                
                                 {/* Rotating Spokes */}
                                 <g className="car-card__wheel car-card__wheel--rear">
                                     <path d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />
@@ -103,7 +105,7 @@ export const CarCard = () => {
                                 {/* Tire & Rim Border */}
                                 <circle cx="0" cy="0" r="14" fill="#090909" stroke="var(--text-dim)" strokeWidth="0.5" />
                                 <circle cx="0" cy="0" r="10" fill="transparent" stroke="#333" strokeWidth="1.5" />
-
+                                
                                 {/* Rotating Spokes */}
                                 <g className="car-card__wheel car-card__wheel--front">
                                     <path d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />

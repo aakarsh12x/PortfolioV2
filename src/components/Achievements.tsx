@@ -144,7 +144,6 @@ export const Achievements = () => {
                                 <h3>{item.label}</h3>
                             </div>
                             <p>{item.desc}</p>
-                            <item.icon aria-hidden="true" />
                         </article>
                     ))}
                 </div>

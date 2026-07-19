@@ -958,9 +958,10 @@ html.light .ambient-glow {
   height: min(58vh, 560px);
   min-height: 380px;
   right: clamp(1rem, 5vw, 5rem);
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0;
+  top: 0;
+  bottom: 0;
+  margin-block: auto;
+  margin-inline: 0;
 }
 
 .hero-portrait__offset {
@@ -1178,7 +1179,7 @@ html.light .hero-portrait__tone {
   .hero-shell { width: min(100% - 2.5rem, 900px); padding-top: 4.8rem; }
   .hero-composition { min-height: 720px; align-content: start; padding-top: 4rem; }
   .hero-title { grid-column: 1 / 12; font-size: clamp(4rem, 10vw, 6rem); }
-  .hero-portrait { width: clamp(300px, 47vw, 430px); height: 500px; right: 2rem; top: 54%; }
+  .hero-portrait { width: clamp(300px, 47vw, 430px); height: 500px; right: 2rem; top: 0; bottom: 0; margin-block: auto; }
   .hero-intro { grid-column: 1 / 7; grid-row: 2; align-self: start; margin: 0; padding-left: 0; }
   .hero-crosshair { right: -2.5rem; }
   .hero-proof { grid-template-columns: repeat(3, 1fr); }
@@ -1824,9 +1825,16 @@ textarea:focus-visible,
   100% { transform: translateY(2px) rotate(0.2deg); }
 }
 
+
 /* Wheels */
+.car-card__wheel--rear {
+  transform-origin: 22.9167% 64.7059%;
+}
+.car-card__wheel--front {
+  transform-origin: 77.0833% 64.7059%;
+}
 .car-card__wheel {
-  transform-origin: 0px 0px;
+  transform-box: view-box;
   animation: wheel-rotate 2s linear infinite;
 }
 .car-card-wrapper:hover .car-card__wheel,
