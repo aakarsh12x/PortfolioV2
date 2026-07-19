@@ -1827,14 +1827,9 @@ textarea:focus-visible,
 
 
 /* Wheels */
-.car-card__wheel--rear {
-  transform-origin: 22.9167% 64.7059%;
-}
-.car-card__wheel--front {
-  transform-origin: 77.0833% 64.7059%;
-}
 .car-card__wheel {
-  transform-box: view-box;
+  transform-box: fill-box;
+  transform-origin: center;
   animation: wheel-rotate 2s linear infinite;
 }
 .car-card-wrapper:hover .car-card__wheel,
@@ -1888,10 +1883,4 @@ textarea:focus-visible,
     bottom: 22px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .car-card, .car-card__road-line, .car-card__svg-car, .car-card__car-body, .car-card__wheel, .car-card__arrow, .speed-line {
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
-}
+

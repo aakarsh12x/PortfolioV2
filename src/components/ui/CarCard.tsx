@@ -92,8 +92,8 @@ export const CarCard = () => {
                                 <circle cx="0" cy="0" r="10" fill="transparent" stroke="#333" strokeWidth="1.5" />
                                 
                                 {/* Rotating Spokes */}
-                                <g className="car-card__wheel car-card__wheel--rear">
-                                    <path d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />
+                                <g>
+                                    <path className="car-card__wheel" d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />
                                     <circle cx="0" cy="0" r="3" fill="var(--accent)" />
                                 </g>
                             </g>
@@ -107,8 +107,8 @@ export const CarCard = () => {
                                 <circle cx="0" cy="0" r="10" fill="transparent" stroke="#333" strokeWidth="1.5" />
                                 
                                 {/* Rotating Spokes */}
-                                <g className="car-card__wheel car-card__wheel--front">
-                                    <path d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />
+                                <g>
+                                    <path className="car-card__wheel" d="M-1.5,-10 L1.5,-10 L2.5,-3 L9,-8 L11,-6 L4,-1 L10,1 L10,4 L3,3 L8,9 L6,11 L1,4 L-1,10 L-4,10 L-3,3 L-9,8 L-11,6 L-4,-1 L-10,-1 L-10,-4 L-3,-3 L-8,-9 L-6,-11 L-1,-4 Z" fill="var(--text-primary)" />
                                     <circle cx="0" cy="0" r="3" fill="var(--accent)" />
                                 </g>
                             </g>
