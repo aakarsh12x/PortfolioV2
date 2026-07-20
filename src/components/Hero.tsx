@@ -95,7 +95,7 @@ export const Hero = () => {
             <div className="hero-shell">
                 <motion.div className="hero-meta" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
                     <p className="hero-availability"><span aria-hidden="true" />Open to SDE roles</p>
-                    <p className="hero-coordinate">Full-stack engineer / India / 2026</p>
+                    <p className="hero-coordinate">Full-Stack &amp; AI Engineer / India / 2026</p>
                 </motion.div>
 
                 <div className="hero-composition">
@@ -112,7 +112,7 @@ export const Hero = () => {
                             <div className="hero-portrait__tone" aria-hidden="true" />
                         </motion.div>
                         <div className="hero-portrait__stamp" aria-hidden="true"><span>Product</span><span>Systems</span><span>Scale</span></div>
-                        <figcaption>Aakarsh Singh / Founding engineer</figcaption>
+                        <figcaption>Aakarsh Singh / Full-Stack &amp; AI Engineer</figcaption>
                     </motion.figure>
 
                     <h1 id="hero-title" className="hero-title">
@@ -123,7 +123,7 @@ export const Hero = () => {
                     </h1>
 
                     <motion.div className="hero-intro" initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.75, ease: EASE }}>
-                        <p>Founding engineer and product-minded builder turning raw ideas into fast, resilient software - from the first commit to the first <strong>25,000 users.</strong></p>
+                        <p>Full-stack &amp; AI engineer turning raw ideas into fast, resilient software — from the first commit to the first <strong>25,000 users.</strong></p>
                         <div className="hero-actions">
                             <Magnetic><a href="#experience" className="hero-action hero-action--primary">Selected experience <ArrowDownRight aria-hidden="true" /></a></Magnetic>
                             <Magnetic><a href="#contact" className="hero-action hero-action--text">Discuss a role <ArrowUpRight aria-hidden="true" /></a></Magnetic>

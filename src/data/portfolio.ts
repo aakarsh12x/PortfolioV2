@@ -73,19 +73,19 @@ export const COLLEGE_EXPERIENCE = [
 export const SKILLS = [
     {
         category: "Languages",
-        items: ["Java", "Python", "JavaScript", "TypeScript", "Dart", "SQL", "HTML/CSS"]
+        items: ["Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"]
     },
     {
         category: "Frameworks",
-        items: ["React", "React Native", "Next.js", "Node.js", "Express", "Flutter", "Socket.IO"]
+        items: ["React", "React Native", "Next.js", "Node.js", "Express", "Socket.IO"]
     },
     {
         category: "Data & Cloud",
-        items: ["MongoDB", "PostgreSQL", "Redis", "AWS (EC2, RDS, Lambda, Cognito)", "Docker"]
+        items: ["PostgreSQL", "MongoDB", "Redis", "PostGIS", "AWS (EC2, RDS, S3, Lambda)", "Docker", "GitHub Actions", "Kubernetes"]
     },
     {
         category: "Practices",
-        items: ["REST APIs", "WebSockets", "CI/CD", "Testing (Jest)", "System Optimization"]
+        items: ["REST APIs", "WebSockets", "Distributed Systems", "Microservices", "CI/CD", "Linux", "Agile", "Unit & Integration Testing"]
     }
 ];
 
