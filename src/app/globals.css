@@ -1368,8 +1368,8 @@ html.light .hero-portrait__tone {
   max-width: 16ch;
   margin: 0;
   font-family: var(--font-syne), sans-serif;
-  font-size: clamp(1.5rem, 2.6vw, 2.75rem);
-  line-height: 1;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 0.95;
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
@@ -1714,6 +1714,7 @@ textarea:focus-visible,
 .car-card__label {
   display: inline-block;
   color: var(--accent);
+  font-family: var(--font-syne), sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1722,11 +1723,10 @@ textarea:focus-visible,
 }
 .car-card h3 {
   font-family: var(--font-syne), sans-serif;
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 0.9;
   margin: 0 0 1rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
 }
 .car-card p {
   max-width: 52ch;
@@ -1850,6 +1850,7 @@ textarea:focus-visible,
   padding-top: 1.25rem;
 }
 .car-card__footer span {
+  font-family: var(--font-syne), sans-serif;
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
