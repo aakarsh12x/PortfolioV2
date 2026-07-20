@@ -85,23 +85,6 @@ export const Hero = () => {
                     },
                 });
             }
-
-            // Crosshair - drift away on scroll
-            const crosshair = sectionRef.current.querySelector(".hero-crosshair-float");
-            if (crosshair) {
-                gsap.to(crosshair, {
-                    y: -80,
-                    x: 30,
-                    opacity: 0,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "30% top",
-                        end: "80% top",
-                        scrub: 1,
-                    },
-                });
-            }
         },
         { scope: sectionRef, dependencies: [reduceMotion] }
     );
@@ -127,11 +110,6 @@ export const Hero = () => {
                             transition={{ duration: 1.1, delay: 0.2, ease: EASE }}>
                             <Image src="/profile.jpg" alt="Aakarsh Singh in profile" fill priority sizes="(max-width: 768px) 82vw, 42vw" className="hero-portrait__image" />
                             <div className="hero-portrait__tone" aria-hidden="true" />
-                            <div className="hero-portrait__scan" aria-hidden="true" />
-                        </motion.div>
-                        <motion.div className="hero-crosshair-float" initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
-                            animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 1, ease: EASE }} aria-hidden="true">
-                            <div className="hero-crosshair"><span /><i /></div>
                         </motion.div>
                         <div className="hero-portrait__stamp" aria-hidden="true"><span>Product</span><span>Systems</span><span>Scale</span></div>
                         <figcaption>Aakarsh Singh / Founding engineer</figcaption>
