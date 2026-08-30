@@ -23,72 +23,32 @@ export const Projects = () => {
             const heading = sectionRef.current.querySelector(".work-heading");
             if (heading) {
                 gsap.from(heading, {
-                    y: 50,
+                    y: 24,
                     opacity: 0,
-                    duration: 0.9,
-                    ease: "power3.out",
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: heading,
-                        start: "top 85%",
+                        start: "top 88%",
                         toggleActions: "play none none none",
                     },
                 });
             }
 
-            // Each project - image scale-up on scroll + copy stagger
+            // Each project - gentle fade entrance
             const projects = gsap.utils.toArray<HTMLElement>(".work-project");
             projects.forEach((project) => {
-                const visual = project.querySelector(".work-project__visual");
-                const img = project.querySelector<HTMLElement>(".work-project__visual img");
-                const copy = project.querySelector(".work-project__copy");
-
-                // Image: start scaled down and slightly transparent, scrub to full
-                if (img && visual) {
-                    gsap.fromTo(
-                        img,
-                        { scale: 1.15 },
-                        {
-                            scale: 1,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: visual,
-                                start: "top 95%",
-                                end: "bottom 20%",
-                                scrub: 1.5,
-                            },
-                        }
-                    );
-
-                    // Visual container entrance with clip-path reveal
-                    gsap.from(visual, {
-                        clipPath: "inset(15% 0 15% 0)",
-                        opacity: 0,
-                        duration: 1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: visual,
-                            start: "top 88%",
-                            toggleActions: "play none none none",
-                        },
-                    });
-                }
-
-                // Copy: stagger reveal of child elements
-                if (copy) {
-                    const copyChildren = copy.children;
-                    gsap.from(copyChildren, {
-                        y: 40,
-                        opacity: 0,
-                        duration: 0.7,
-                        stagger: 0.08,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: copy,
-                            start: "top 88%",
-                            toggleActions: "play none none none",
-                        },
-                    });
-                }
+                gsap.from(project, {
+                    y: 24,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: project,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                    },
+                });
             });
 
             // Magnetic overlay pill animation on hover
@@ -136,7 +96,7 @@ export const Projects = () => {
             <div className="work-shell">
                 <header className="work-heading">
                     <p>Selected work</p>
-                    <h2 id="work-title">Ideas are cheap. Here's what shipped.</h2>
+                    <h2 id="work-title">Ideas are cheap. Here&apos;s what shipped.</h2>
                 </header>
 
                 <div className="work-list">
@@ -153,28 +113,34 @@ export const Projects = () => {
                                     src={project.image}
                                     alt={`${project.title} product interface`}
                                     fill
-                                    sizes="(max-width: 768px) 100vw, 58vw"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
                                 <span className="work-project__overlay-pill">
                                     View live <ArrowUpRight aria-hidden="true" />
                                 </span>
                             </a>
                             <div className="work-project__copy">
-                                <span>{String(index + 1).padStart(2, "0")}</span>
-                                <h3>{project.title}</h3>
-                                <p>{project.desc}</p>
-                                <ul aria-label={`${project.title} technologies`}>
-                                    {project.tech.map((technology) => (
-                                        <li key={technology}>{technology}</li>
-                                    ))}
-                                </ul>
-                                <a
-                                    href={project.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Explore project <ArrowUpRight aria-hidden="true" />
-                                </a>
+                                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                                    <div className="work-project__header">
+                                        <h3>{project.title}</h3>
+                                        <span>{String(index + 1).padStart(2, "0")}</span>
+                                    </div>
+                                    <p>{project.desc}</p>
+                                </div>
+                                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginTop: "0.5rem" }}>
+                                    <ul aria-label={`${project.title} technologies`}>
+                                        {project.tech.map((technology) => (
+                                            <li key={technology}>{technology}</li>
+                                        ))}
+                                    </ul>
+                                    <a
+                                        href={project.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Explore project <ArrowUpRight aria-hidden="true" />
+                                    </a>
+                                </div>
                             </div>
                         </article>
                     ))}

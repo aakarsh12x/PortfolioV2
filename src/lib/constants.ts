@@ -59,6 +59,18 @@ export const skills = {
 export const experiences = [
     {
         id: 1,
+        role: "SDE Intern",
+        company: "Faym – India's Largest Influencer Earnings App",
+        location: "India (Remote)",
+        period: "2025 – Present",
+        highlights: [
+            "Engineered and optimized high-throughput backend systems handling data-intensive workloads at the scale of 7.5M+ live users",
+            "Designed efficient pipelines for querying and processing 200M+ MongoDB documents with high performance",
+            "Leveraged Python, Node.js, Next.js, and MongoDB to drive backend optimizations delivering up to a 4× reduction in loading times",
+        ],
+    },
+    {
+        id: 2,
         role: "Software Developer Intern",
         company: "Aitreya Tech Solutions – Alumns",
         location: "Noida (Remote)",
@@ -70,7 +82,7 @@ export const experiences = [
         ],
     },
     {
-        id: 2,
+        id: 3,
         role: "Full-Stack Developer",
         company: "P´eˇce - School Management System (Wvintech Solution)",
         location: "Malaysia (Remote)",

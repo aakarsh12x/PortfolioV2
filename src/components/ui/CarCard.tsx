@@ -1,29 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Gauge } from "lucide-react";
 
 export const CarCard = () => {
-    // Mobile tap-to-move state
+    // Acceleration state: toggled or held
     const [isAccelerating, setIsAccelerating] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
-    const isMovingFast = isAccelerating || isHovered;
+    const isEngaged = isAccelerating || isHovered;
+
+    const handlePressStart = (e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        setIsAccelerating(true);
+    };
+
+    const handlePressEnd = (e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        setIsAccelerating(false);
+    };
+
+    const handleToggle = (e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        setIsAccelerating((prev) => !prev);
+    };
 
     return (
         <div
-            className={`car-card-wrapper ${isAccelerating ? 'is-accelerating' : ''}`}
-            onClick={() => setIsAccelerating(prev => !prev)}
+            className={`car-card-wrapper ${isEngaged ? "is-accelerating" : ""}`}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            onMouseLeave={() => {
+                setIsHovered(false);
+                setIsAccelerating(false);
+            }}
         >
             <div className="car-card">
                 <div className="car-card__content">
-                    <span className="car-card__label">Continuous Delivery</span>
-                    <h3>Shipped with speed &amp; precision.</h3>
-                    <p>
-                        From design to deployment, shipping clean code is about keeping momentum. Hover to accelerate the build pipeline.
-                    </p>
+                    <div className="car-card__info">
+                        <span className="car-card__label">Continuous Delivery</span>
+                        <h3>Shipped with speed &amp; precision.</h3>
+                        <p>
+                            From design to deployment, shipping clean code is about keeping momentum. Press the pedal to accelerate the pipeline.
+                        </p>
+                    </div>
 
                     {/* SVG Animated Car Scene */}
                     <div className="car-card__scene">
@@ -115,9 +134,41 @@ export const CarCard = () => {
                         </svg>
                     </div>
 
+                    {/* Integrated Symmetrical Footer: Speed Text on Left, Pedal on Right */}
                     <div className="car-card__footer">
-                        <span>Speed-optimized architecture</span>
-                        <ArrowRight className="car-card__arrow" aria-hidden="true" />
+                        <div className="car-card__footer-meta">
+                            <Gauge className="car-card__footer-icon" aria-hidden="true" />
+                            <div className="car-card__footer-copy">
+                                <span>Speed-optimized architecture</span>
+                                <small>Press and hold pedal to accelerate</small>
+                            </div>
+                        </div>
+
+                        <div className="car-card__footer-action">
+                            <div className="car-card__footer-divider" aria-hidden="true" />
+                            <button
+                                type="button"
+                                className={`car-card__pedal-btn ${isEngaged ? "car-card__pedal-btn--pressed" : ""}`}
+                                onMouseDown={handlePressStart}
+                                onMouseUp={handlePressEnd}
+                                onTouchStart={handlePressStart}
+                                onTouchEnd={handlePressEnd}
+                                onClick={handleToggle}
+                                aria-label="Accelerator Pedal"
+                                aria-pressed={isEngaged}
+                            >
+                                <div className="car-card__pedal-body">
+                                    <div className="car-card__pedal-ribs">
+                                        <span />
+                                        <span />
+                                        <span />
+                                        <span />
+                                        <span />
+                                    </div>
+                                </div>
+                                <div className="car-card__pedal-base" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

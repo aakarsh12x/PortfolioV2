@@ -35,59 +35,7 @@ export const Hero = () => {
     };
     const resetPortrait = () => { portraitX.set(0); portraitY.set(0); };
 
-    // GSAP scroll-driven parallax
-    useGSAP(
-        () => {
-            if (reduceMotion || !sectionRef.current) return;
 
-            // Portrait parallax - moves up slightly as user scrolls
-            const portrait = sectionRef.current.querySelector(".hero-portrait");
-            if (portrait) {
-                gsap.to(portrait, {
-                    y: -60,
-                    scale: 0.95,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 1.5,
-                    },
-                });
-            }
-
-            // Proof bar - slides up with slight parallax delay
-            const proofBar = sectionRef.current.querySelector(".hero-proof");
-            if (proofBar) {
-                gsap.to(proofBar, {
-                    y: -30,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "60% top",
-                        end: "bottom top",
-                        scrub: 1,
-                    },
-                });
-            }
-
-            // Hero title - slow parallax offset on scroll
-            const title = sectionRef.current.querySelector(".hero-title");
-            if (title) {
-                gsap.to(title, {
-                    y: -40,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "30% top",
-                        end: "bottom top",
-                        scrub: 2,
-                    },
-                });
-            }
-        },
-        { scope: sectionRef, dependencies: [reduceMotion] }
-    );
 
     return (
         <section ref={sectionRef} id="home" className="hero-stage" aria-labelledby="hero-title" onMouseMove={movePortrait} onMouseLeave={resetPortrait}>

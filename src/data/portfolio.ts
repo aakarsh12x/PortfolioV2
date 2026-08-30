@@ -6,13 +6,29 @@ import {
 export const EXPERIENCE = [
     {
         id: 1,
+        role: "SDE Intern",
+        company: "Faym",
+        url: "https://faym.co",
+        location: "India",
+        period: "2025 – Present",
+        current: true,
+        description: "Engineered high-throughput backend pipelines for 7.5M+ live users, querying 200M+ MongoDB documents. Drove backend optimizations with Python, Node.js, and Next.js, achieving up to 4× faster load times.",
+        metrics: [
+            { value: "7.5M+", label: "Live Users" },
+            { value: "4x", label: "Loading Speedup" },
+            { value: "200M+", label: "MongoDB Documents" },
+        ],
+        tech: ["Python", "Node.js", "Next.js", "MongoDB", "High-Throughput Systems", "REST APIs"],
+    },
+    {
+        id: 2,
         role: "Founding Engineer",
         company: "Cherry Dating",
         url: "https://cherrydate.in",
         location: "Lucknow, India",
         period: "Jan 2026 – Present",
         current: true,
-        description: "Architected a scalable mobile platform serving 10k+ monthly active users, sustaining sub-200ms response times handling 60k+ daily geospatial matching requests. Modeled an ELO-based recommendation engine increasing matches per user by 35%, and optimized AWS infrastructure caching to reduce monthly costs by 60%.",
+        description: "Architected mobile backend for 10k+ MAU with sub-200ms latency across 60k+ daily geospatial matches. Implemented an ELO recommendation engine (+35% matches) and reduced AWS costs by 60%.",
         metrics: [
             { value: "10k+", label: "Monthly Active Users" },
             { value: "+35%", label: "Matches per User" },
@@ -21,14 +37,14 @@ export const EXPERIENCE = [
         tech: ["React Native", "Node.js", "MongoDB", "Express", "Axios", "Tailwind", "Framer Motion"],
     },
     {
-        id: 2,
-        role: "Software Developer Intern",
+        id: 3,
+        role: "SDE Intern",
         company: "Aitreya Tech Solutions",
         url: "https://alumns.com",
         location: "Noida, India",
         period: "Oct – Dec 2025",
         current: false,
-        description: "Developed a scalable real-time chat system with WebSocket event-driven queuing to support 5,000+ concurrent users in production. Architected 20+ RESTful APIs optimizing response times by 30%, and refactored React state management to improve Core Web Vitals, decreasing page load times by 25%.",
+        description: "Engineered scalable real-time WebSocket chat system supporting 5,000+ concurrent users. Built 20+ REST APIs reducing response times by 30% and improved Core Web Vitals to cut load times by 25%.",
         metrics: [
             { value: "5k+", label: "Concurrent Chat Users" },
             { value: "-30%", label: "API Response Time" },
@@ -37,13 +53,13 @@ export const EXPERIENCE = [
         tech: ["Node.js", "Socket.IO", "MongoDB", "React", "Redux", "AWS"],
     },
     {
-        id: 3,
+        id: 4,
         role: "Full-Stack Developer",
         company: "Wvintech Solution",
         location: "Selangor, Malaysia",
         period: "Mar – Aug 2025",
         current: false,
-        description: "Shipped an enterprise full-stack ERP school management system securing 15,000+ records with strict RBAC. Optimized AWS RDS (PostgreSQL) through query indexing and connection pooling to cut API latency by 35%, and automated CI/CD pipelines via GitHub Actions and AWS Lambda.",
+        description: "Shipped enterprise ERP system securing 15,000+ records with RBAC. Optimized AWS RDS PostgreSQL to reduce latency by 35% and automated serverless CI/CD pipelines with Lambda and GitHub Actions.",
         metrics: [
             { value: "15k+", label: "Secured Records" },
             { value: "-35%", label: "API Latency" },
@@ -55,18 +71,32 @@ export const EXPERIENCE = [
 
 export const COLLEGE_EXPERIENCE = [
     {
-        role: "Social Media Lead",
-        organization: "Aarzoo Cultural Club",
-        institution: "IIIT Bhopal",
-        period: "2024 – 2025",
-        icon: Megaphone
-    },
-    {
+        id: "L.01",
         role: "PR Head",
         organization: "Entrepreneurship Cell",
         institution: "IIIT Bhopal",
         period: "2025 – Present",
+        current: true,
+        description: "Directing corporate outreach, venture partnerships, and institutional communications for flagship startup summits across central India.",
+        metrics: [
+            { value: "15+", label: "Corporate Partners" },
+            { value: "500+", label: "Summit Attendees" }
+        ],
         icon: Users
+    },
+    {
+        id: "L.02",
+        role: "Social Media Lead",
+        organization: "Aarzoo Cultural Club",
+        institution: "IIIT Bhopal",
+        period: "2024 – 2025",
+        current: false,
+        description: "Spearheaded digital brand architecture, content production pipelines, and campaign distribution reaching 2,000+ student attendees.",
+        metrics: [
+            { value: "2k+", label: "Audience Reach" },
+            { value: "40+", label: "Campaigns Shipped" }
+        ],
+        icon: Megaphone
     }
 ];
 

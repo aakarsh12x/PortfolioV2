@@ -23,26 +23,26 @@ export const Contact = () => {
             const status = section.querySelector(".contact-status");
             if (status) {
                 gsap.from(status, {
-                    y: 30,
+                    y: 16,
                     opacity: 0,
-                    duration: 0.7,
-                    ease: "power3.out",
+                    duration: 0.5,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: section,
-                        start: "top 75%",
+                        start: "top 80%",
                         toggleActions: "play none none none",
                     },
                 });
             }
 
-            // Headline - split into words and reveal with clip-path
+            // Headline entrance
             const h2 = section.querySelector("h2");
             if (h2) {
                 gsap.from(h2, {
-                    y: 80,
-                    clipPath: "inset(0 0 100% 0)",
-                    duration: 1,
-                    ease: "power3.out",
+                    y: 24,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: h2,
                         start: "top 88%",
@@ -51,57 +51,21 @@ export const Contact = () => {
                 });
             }
 
-            // Body text and buttons stagger
+            // Bottom content gentle fade
             const bottomContent = section.querySelector(".contact-bottom");
             if (bottomContent) {
-                const children = bottomContent.children;
-                gsap.from(children, {
-                    y: 40,
+                gsap.from(bottomContent, {
+                    y: 20,
                     opacity: 0,
-                    duration: 0.7,
-                    stagger: 0.12,
-                    ease: "power3.out",
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: bottomContent,
-                        start: "top 85%",
+                        start: "top 88%",
                         toggleActions: "play none none none",
                     },
                 });
             }
-
-            // CTA buttons - scale up entrance
-            const buttons = gsap.utils.toArray<HTMLElement>(".contact-btn");
-            buttons.forEach((btn, i) => {
-                gsap.from(btn, {
-                    scale: 0.85,
-                    opacity: 0,
-                    duration: 0.5,
-                    delay: 0.3 + i * 0.1,
-                    ease: "back.out(1.4)",
-                    scrollTrigger: {
-                        trigger: btn,
-                        start: "top 92%",
-                        toggleActions: "play none none none",
-                    },
-                });
-            });
-
-            // Social links - wave entrance from bottom
-            const socialLinks = gsap.utils.toArray<HTMLElement>(".contact-links a");
-            socialLinks.forEach((link, i) => {
-                gsap.from(link, {
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.6,
-                    delay: i * 0.15,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: section.querySelector(".contact-links"),
-                        start: "top 92%",
-                        toggleActions: "play none none none",
-                    },
-                });
-            });
         },
         { scope: sectionRef, dependencies: [reduceMotion] }
     );

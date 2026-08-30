@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -14,6 +15,14 @@ export const Experience = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const headingRef = useRef<HTMLElement>(null);
     const reduceMotion = useSafeReducedMotion();
+    const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+
+    const toggleDescription = (id: number) => {
+        setExpandedIds((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
 
     useGSAP(
         () => {
@@ -23,102 +32,61 @@ export const Experience = () => {
             const heading = headingRef.current;
             if (heading) {
                 gsap.from(heading, {
-                    y: 60,
+                    y: 24,
                     opacity: 0,
-                    duration: 1,
-                    ease: "power3.out",
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: heading,
-                        start: "top 85%",
-                        end: "top 50%",
+                        start: "top 88%",
                         toggleActions: "play none none none",
                     },
                 });
             }
 
-            // Each experience role - stagger entrance
+            // Each experience role - gentle fade
             const roles = gsap.utils.toArray<HTMLElement>(".experience-role");
-            roles.forEach((role, i) => {
+            roles.forEach((role) => {
                 gsap.from(role, {
-                    y: 80,
+                    y: 20,
                     opacity: 0,
-                    duration: 0.9,
-                    ease: "power3.out",
+                    duration: 0.5,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: role,
-                        start: "top 88%",
-                        end: "top 55%",
+                        start: "top 90%",
                         toggleActions: "play none none none",
                     },
                 });
-
-                // Animate the metric values with a count-up effect
-                const metricValues = role.querySelectorAll<HTMLElement>(".experience-role__impact dd");
-                metricValues.forEach((dd) => {
-                    const text = dd.textContent || "";
-                    gsap.from(dd, {
-                        textContent: 0,
-                        duration: 1.5,
-                        delay: 0.3,
-                        ease: "power2.out",
-                        snap: { textContent: 1 },
-                        scrollTrigger: {
-                            trigger: dd,
-                            start: "top 90%",
-                            toggleActions: "play none none none",
-                        },
-                        onComplete: () => {
-                            dd.textContent = text; // Restore original text with symbols
-                        },
-                    });
-                });
-
-                // Rail number scale-in
-                const railNum = role.querySelector(".experience-role__rail > span");
-                if (railNum) {
-                    gsap.from(railNum, {
-                        scale: 0,
-                        opacity: 0,
-                        duration: 0.6,
-                        delay: 0.15,
-                        ease: "back.out(1.7)",
-                        scrollTrigger: {
-                            trigger: role,
-                            start: "top 85%",
-                            toggleActions: "play none none none",
-                        },
-                    });
-                }
             });
 
-            // Community section - slide in
-            const communityHeading = sectionRef.current.querySelector(".experience-community__heading");
-            const communityRoles = sectionRef.current.querySelector(".experience-community__roles");
-            if (communityHeading) {
-                gsap.from(communityHeading, {
-                    x: -60,
+            // Community section - gentle fade
+            const communityHeader = sectionRef.current.querySelector(".experience-community__header");
+            const communityRows = sectionRef.current.querySelectorAll(".experience-community__row");
+            if (communityHeader) {
+                gsap.from(communityHeader, {
+                    y: 20,
                     opacity: 0,
-                    duration: 0.9,
-                    ease: "power3.out",
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
-                        trigger: communityHeading,
-                        start: "top 85%",
+                        trigger: communityHeader,
+                        start: "top 88%",
                         toggleActions: "play none none none",
                     },
                 });
             }
-            if (communityRoles) {
-                const articles = communityRoles.querySelectorAll("article");
-                articles.forEach((article, i) => {
-                    gsap.from(article, {
-                        x: 50,
+            if (communityRows.length) {
+                communityRows.forEach((row, i) => {
+                    gsap.from(row, {
+                        y: 16,
                         opacity: 0,
-                        duration: 0.7,
-                        delay: i * 0.12,
-                        ease: "power3.out",
+                        duration: 0.5,
+                        delay: i * 0.08,
+                        ease: "power2.out",
                         scrollTrigger: {
-                            trigger: communityRoles,
-                            start: "top 85%",
+                            trigger: row,
+                            start: "top 92%",
                             toggleActions: "play none none none",
                         },
                     });
@@ -170,7 +138,40 @@ export const Experience = () => {
                                 </div>
 
                                 <div className="experience-role__brief">
-                                    <p>{job.description}</p>
+                                    <button
+                                        type="button"
+                                        className={`experience-role__toggle ${expandedIds[job.id] ? "experience-role__toggle--active" : ""}`}
+                                        onClick={() => toggleDescription(job.id)}
+                                        aria-expanded={Boolean(expandedIds[job.id])}
+                                        aria-controls={`exp-desc-${job.id}`}
+                                    >
+                                        <span className="experience-role__toggle-indicator" aria-hidden="true">
+                                            {expandedIds[job.id] ? "−" : "+"}
+                                        </span>
+                                        <span className="experience-role__toggle-label">
+                                            {expandedIds[job.id] ? "Close Details" : "Overview & Impact"}
+                                        </span>
+                                    </button>
+
+                                    <AnimatePresence initial={false}>
+                                        {expandedIds[job.id] && (
+                                            <motion.div
+                                                id={`exp-desc-${job.id}`}
+                                                key="desc"
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                                className="experience-role__dropdown"
+                                                onAnimationComplete={() => {
+                                                    ScrollTrigger.refresh();
+                                                }}
+                                            >
+                                                <p className="experience-role__desc">{job.description}</p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
                                     <ul aria-label={`Technologies used at ${job.company}`}>
                                         {job.tech.map((technology) => (
                                             <li key={technology}>{technology}</li>
@@ -195,19 +196,38 @@ export const Experience = () => {
                 </div>
 
                 <div className="experience-community">
-                    <div className="experience-community__heading">
-                        <p>Beyond the commit</p>
+                    <header className="experience-community__header">
+                        <span className="experience-community__index">01.B / Ecosystem &amp; Community</span>
                         <h3>Leadership is another kind of system design.</h3>
-                    </div>
-                    <div className="experience-community__roles">
+                        <p className="experience-community__manifesto">
+                            Directing ecosystem partnerships, digital brand architecture, and flagship student initiatives at IIIT Bhopal.
+                        </p>
+                    </header>
+
+                    <div className="experience-community__ledger">
                         {COLLEGE_EXPERIENCE.map((role) => (
-                            <article key={`${role.role}-${role.organization}`}>
-                                <role.icon aria-hidden="true" />
-                                <div>
-                                    <h4>{role.role}</h4>
-                                    <p>{role.organization}</p>
+                            <article key={`${role.role}-${role.organization}`} className="experience-community__row">
+                                <div className="experience-community__rail">
+                                    <span className="experience-community__num">{role.id}</span>
+                                    <span className="experience-community__tenure">{role.period}</span>
                                 </div>
-                                <span>{role.period}</span>
+
+                                <div className="experience-community__body">
+                                    <div className="experience-community__identity">
+                                        <p className="experience-community__dept">{role.organization} <span>/</span> {role.institution}</p>
+                                        <h4>{role.role}</h4>
+                                    </div>
+                                    <p className="experience-community__narrative">{role.description}</p>
+                                </div>
+
+                                <div className="experience-community__metrics">
+                                    {role.metrics.map((m) => (
+                                        <div key={m.label} className="experience-community__metric">
+                                            <strong>{m.value}</strong>
+                                            <span>{m.label}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </article>
                         ))}
                     </div>

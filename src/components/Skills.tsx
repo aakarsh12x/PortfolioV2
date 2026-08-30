@@ -21,46 +21,30 @@ export const Skills = () => {
             const heading = sectionRef.current.querySelector(".toolkit-heading");
             if (heading) {
                 gsap.from(heading, {
-                    y: 50,
+                    y: 24,
                     opacity: 0,
-                    duration: 0.9,
-                    ease: "power3.out",
+                    duration: 0.6,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: heading,
-                        start: "top 85%",
+                        start: "top 88%",
                         toggleActions: "play none none none",
                     },
                 });
             }
 
-            // Each skill category row - stagger entrance
+            // Each skill category row - gentle fade
             const rows = gsap.utils.toArray<HTMLElement>(".toolkit-index article");
             rows.forEach((row, i) => {
-                // Row slides in from left
                 gsap.from(row, {
-                    x: -50,
+                    y: 16,
                     opacity: 0,
-                    duration: 0.7,
-                    delay: i * 0.1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: row,
-                        start: "top 90%",
-                        toggleActions: "play none none none",
-                    },
-                });
-
-                // Individual skill items stagger within each row
-                const items = row.querySelectorAll("li");
-                gsap.from(items, {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.45,
-                    stagger: 0.05,
+                    duration: 0.5,
+                    delay: i * 0.08,
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: row,
-                        start: "top 85%",
+                        start: "top 92%",
                         toggleActions: "play none none none",
                     },
                 });
@@ -79,9 +63,7 @@ export const Skills = () => {
             <div className="toolkit-shell">
                 <header className="toolkit-heading">
                     <p>Working toolkit</p>
-                    <h2 id="toolkit-title">
-                        Technology is a means. Shipping is the point.
-                    </h2>
+                    <h2 id="toolkit-title">Technology is a means. Shipping is the point.</h2>
                 </header>
                 <div className="toolkit-index">
                     {SKILLS.map((group, index) => (
