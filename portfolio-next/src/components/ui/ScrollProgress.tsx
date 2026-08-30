@@ -12,8 +12,20 @@ export const ScrollProgress = () => {
 
     return (
         <motion.div
-            className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[100]"
-            style={{ scaleX, backgroundColor: "var(--accent)" }}
+            style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "3px",
+                backgroundColor: "var(--accent)",
+                transformOrigin: "0%",
+                scaleX,
+                zIndex: 99999,
+                pointerEvents: "none",
+                boxShadow: "0 0 12px rgba(240, 209, 0, 0.7)"
+            }}
+            aria-hidden="true"
         />
     );
 };

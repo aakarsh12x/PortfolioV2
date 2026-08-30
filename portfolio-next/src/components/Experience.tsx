@@ -1,121 +1,236 @@
 "use client";
 
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import { EXPERIENCE, COLLEGE_EXPERIENCE } from "@/data/portfolio";
-import { ScrollReveal } from "./ui/ScrollReveal";
-import { StaggerContainer, StaggerItem } from "./ui/StaggerContainer";
+import { ArrowUpRight } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
+import { COLLEGE_EXPERIENCE, EXPERIENCE } from "@/data/portfolio";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Experience = () => {
+    const sectionRef = useRef<HTMLElement>(null);
+    const headingRef = useRef<HTMLElement>(null);
+    const reduceMotion = useSafeReducedMotion();
+    const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+
+    const toggleDescription = (id: number) => {
+        setExpandedIds((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
+    useGSAP(
+        () => {
+            if (reduceMotion || !sectionRef.current) return;
+
+            // Heading entrance
+            const heading = headingRef.current;
+            if (heading) {
+                gsap.from(heading, {
+                    y: 24,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: heading,
+                        start: "top 88%",
+                        toggleActions: "play none none none",
+                    },
+                });
+            }
+
+            // Each experience role - gentle fade
+            const roles = gsap.utils.toArray<HTMLElement>(".experience-role");
+            roles.forEach((role) => {
+                gsap.from(role, {
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: role,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                    },
+                });
+            });
+
+            // Community section - gentle fade
+            const communityHeader = sectionRef.current.querySelector(".experience-community__header");
+            const communityRows = sectionRef.current.querySelectorAll(".experience-community__row");
+            if (communityHeader) {
+                gsap.from(communityHeader, {
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: communityHeader,
+                        start: "top 88%",
+                        toggleActions: "play none none none",
+                    },
+                });
+            }
+            if (communityRows.length) {
+                communityRows.forEach((row, i) => {
+                    gsap.from(row, {
+                        y: 16,
+                        opacity: 0,
+                        duration: 0.5,
+                        delay: i * 0.08,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 92%",
+                            toggleActions: "play none none none",
+                        },
+                    });
+                });
+            }
+        },
+        { scope: sectionRef, dependencies: [reduceMotion] }
+    );
+
     return (
-        <section id="experience" className="py-10" style={{ backgroundColor: "var(--bg-card)" }}>
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-32">
+        <section
+            ref={sectionRef}
+            id="experience"
+            className="experience-section"
+            aria-labelledby="experience-title"
+        >
+            <div className="experience-shell">
+                <header ref={headingRef} className="experience-heading">
+                    <p className="experience-heading__label">Selected experience</p>
+                    <h2 id="experience-title">Work that survived contact with reality.</h2>
+                    <p className="experience-heading__intro">
+                        I like the part after the prototype: real users, real constraints,
+                        and systems that still have to feel fast on a bad connection.
+                    </p>
+                </header>
 
-                {/* Header */}
-                <div className="mb-10">
-                    <ScrollReveal variant="slide-up">
-                        <span className="text-xs tracking-[0.3em] uppercase mb-6 block" style={{ color: "var(--accent)" }}>Career</span>
-                        <h2 className="text-3xl lg:text-4xl font-black tracking-tighter" style={{ color: "var(--text-primary)" }}>Experience</h2>
-                        <div className="mt-4 h-px w-24" style={{ backgroundColor: "var(--accent)", opacity: 0.5 }} />
-                    </ScrollReveal>
-                </div>
-
-                {/* Work History */}
-                <div className="mb-10">
+                <div className="experience-ledger">
                     {EXPERIENCE.map((job, index) => (
-                        <div key={job.id} className="mb-10 last:mb-0">
-                            <ScrollReveal variant="slide-up" delay={index * 0.1}>
-                                <div className="flex items-center gap-6 mb-8">
-                                    <span className="text-xs tracking-[0.2em]" style={{ color: "var(--accent)" }}>0{index + 1}</span>
-                                    <div className="flex-1 h-px" style={{ backgroundColor: "var(--border-subtle)" }} />
-                                    {job.current && (
-                                        <span className="px-4 py-2 text-[10px] font-bold tracking-[0.15em] uppercase" style={{ backgroundColor: "var(--accent)", color: "var(--bg-primary)" }}>Current</span>
+                        <article
+                            key={job.id}
+                            className={`experience-role${job.current ? " experience-role--current" : ""}`}
+                        >
+                            <div className="experience-role__rail">
+                                <span>{String(index + 1).padStart(2, "0")}</span>
+                                <p>{job.period}</p>
+                            </div>
+
+                            <div className="experience-role__story">
+                                <div className="experience-role__identity">
+                                    <p>{job.current ? "Building now" : job.location}</p>
+                                    <h3>{job.role}</h3>
+                                    {job.url ? (
+                                        <a href={job.url} target="_blank" rel="noopener noreferrer">
+                                            {job.company} <ArrowUpRight aria-hidden="true" />
+                                        </a>
+                                    ) : (
+                                        <strong>{job.company}</strong>
                                     )}
                                 </div>
-                            </ScrollReveal>
 
-                            <div className="grid lg:grid-cols-2 gap-10">
-                                <ScrollReveal variant="slide-left" delay={0.2}>
-                                    <div>
-                                        <div className="flex items-center gap-3 mb-6" style={{ color: "var(--text-faint)" }}>
-                                            <Calendar className="w-4 h-4" strokeWidth={1.5} />
-                                            <span className="text-sm">{job.period}</span>
-                                        </div>
+                                <div className="experience-role__brief">
+                                    <button
+                                        type="button"
+                                        className={`experience-role__toggle ${expandedIds[job.id] ? "experience-role__toggle--active" : ""}`}
+                                        onClick={() => toggleDescription(job.id)}
+                                        aria-expanded={Boolean(expandedIds[job.id])}
+                                        aria-controls={`exp-desc-${job.id}`}
+                                    >
+                                        <span className="experience-role__toggle-indicator" aria-hidden="true">
+                                            {expandedIds[job.id] ? "−" : "+"}
+                                        </span>
+                                        <span className="experience-role__toggle-label">
+                                            {expandedIds[job.id] ? "Close Details" : "Overview & Impact"}
+                                        </span>
+                                    </button>
 
-                                        <h3 className="text-2xl lg:text-3xl font-black tracking-tight mb-4" style={{ color: "var(--text-primary)" }}>{job.role}</h3>
+                                    <AnimatePresence initial={false}>
+                                        {expandedIds[job.id] && (
+                                            <motion.div
+                                                id={`exp-desc-${job.id}`}
+                                                key="desc"
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                exit={{ opacity: 0, height: 0 }}
+                                                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                                className="experience-role__dropdown"
+                                                onAnimationComplete={() => {
+                                                    ScrollTrigger.refresh();
+                                                }}
+                                            >
+                                                <p className="experience-role__desc">{job.description}</p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
 
-                                        <div className="flex items-center gap-6 mb-5">
-                                            {job.url ? (
-                                                <a href={job.url} target="_blank" rel="noopener noreferrer"
-                                                    className="text-lg font-bold flex items-center gap-2 group/link transition-colors"
-                                                    style={{ color: "var(--accent)" }}
-                                                    onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
-                                                    onMouseLeave={e => (e.currentTarget.style.color = "var(--accent)")}
-                                                >
-                                                    {job.company}
-                                                    <ArrowRight className="w-4 h-4 -rotate-45 mb-1" />
-                                                </a>
-                                            ) : (
-                                                <span className="text-lg font-bold" style={{ color: "var(--accent)" }}>{job.company}</span>
-                                            )}
-                                            <div className="flex items-center gap-2" style={{ color: "var(--text-faint)" }}>
-                                                <MapPin className="w-3 h-3" strokeWidth={1.5} />
-                                                <span className="text-xs">{job.location}</span>
-                                            </div>
-                                        </div>
-
-                                        <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-muted)" }}>{job.description}</p>
-
-                                        <div className="flex flex-wrap gap-2">
-                                            {job.tech.map((t) => (
-                                                <span key={t} className="px-3 py-1.5 text-xs" style={{ backgroundColor: "var(--surface-2)", border: "1px solid var(--border-subtle)", color: "var(--text-faint)" }}>{t}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </ScrollReveal>
-
-                                <ScrollReveal variant="slide-right" delay={0.4}>
-                                    <div className="grid grid-cols-3 lg:grid-cols-1 gap-2 lg:gap-3">
-                                        {job.metrics.map((m, i) => (
-                                            <div key={i} className="p-3 lg:p-5" style={{ backgroundColor: "var(--bg-primary)", border: "1px solid var(--border-subtle)" }}>
-                                                <span className="text-lg lg:text-2xl font-black block mb-1 leading-tight" style={{ color: "var(--accent)" }}>{m.value}</span>
-                                                <span className="text-[8px] lg:text-[9px] tracking-[0.1em] uppercase leading-tight" style={{ color: "var(--text-faint)" }}>{m.label}</span>
-                                            </div>
+                                    <ul aria-label={`Technologies used at ${job.company}`}>
+                                        {job.tech.map((technology) => (
+                                            <li key={technology}>{technology}</li>
                                         ))}
-                                    </div>
-                                </ScrollReveal>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+
+                            <dl
+                                className="experience-role__impact"
+                                aria-label={`${job.company} outcomes`}
+                            >
+                                {job.metrics.map((metric) => (
+                                    <div key={metric.label}>
+                                        <dt>{metric.label}</dt>
+                                        <dd>{metric.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        </article>
                     ))}
                 </div>
 
-                {/* College Experience */}
-                <div className="pt-8 lg:pt-12" style={{ borderTop: "1px solid var(--border-subtle)" }}>
-                    <ScrollReveal variant="slide-up">
-                        <h3 className="text-xl font-black tracking-tight mb-6 lg:mb-12" style={{ color: "var(--text-primary)" }}>Leadership & Community</h3>
-                    </ScrollReveal>
+                <div className="experience-community">
+                    <header className="experience-community__header">
+                        <span className="experience-community__index">01.B / Ecosystem &amp; Community</span>
+                        <h3>Leadership is another kind of system design.</h3>
+                        <p className="experience-community__manifesto">
+                            Directing ecosystem partnerships, digital brand architecture, and flagship student initiatives at IIIT Bhopal.
+                        </p>
+                    </header>
 
-                    <StaggerContainer className="grid md:grid-cols-2 gap-8" staggerDelay={0.2}>
-                        {COLLEGE_EXPERIENCE.map((role, i) => (
-                            <StaggerItem key={i} variant="fade-up">
-                                <div
-                                    className="p-5 lg:p-12 flex items-start gap-4 lg:gap-8 transition-colors group h-full"
-                                    style={{ backgroundColor: "var(--surface-1)", border: "1px solid var(--border-subtle)" }}
-                                >
-                                <div className="p-3 lg:p-4 rounded-full transition-colors" style={{ backgroundColor: "var(--surface-3)" }}>
-                                    <role.icon className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "var(--text-muted)" }} />
+                    <div className="experience-community__ledger">
+                        {COLLEGE_EXPERIENCE.map((role) => (
+                            <article key={`${role.role}-${role.organization}`} className="experience-community__row">
+                                <div className="experience-community__rail">
+                                    <span className="experience-community__num">{role.id}</span>
+                                    <span className="experience-community__tenure">{role.period}</span>
                                 </div>
-                                <div>
-                                    <h4 className="text-xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>{role.role}</h4>
-                                    <p className="text-sm font-bold tracking-widest uppercase mb-4" style={{ color: "var(--accent)" }}>{role.organization}</p>
-                                    <div className="flex flex-col gap-1 text-xs uppercase tracking-widest" style={{ color: "var(--text-faint)" }}>
-                                        <span>{role.institution}</span>
-                                        <span>{role.period}</span>
+
+                                <div className="experience-community__body">
+                                    <div className="experience-community__identity">
+                                        <p className="experience-community__dept">{role.organization} <span>/</span> {role.institution}</p>
+                                        <h4>{role.role}</h4>
                                     </div>
+                                    <p className="experience-community__narrative">{role.description}</p>
                                 </div>
+
+                                <div className="experience-community__metrics">
+                                    {role.metrics.map((m) => (
+                                        <div key={m.label} className="experience-community__metric">
+                                            <strong>{m.value}</strong>
+                                            <span>{m.label}</span>
+                                        </div>
+                                    ))}
                                 </div>
-                            </StaggerItem>
+                            </article>
                         ))}
-                    </StaggerContainer>
+                    </div>
                 </div>
             </div>
         </section>
