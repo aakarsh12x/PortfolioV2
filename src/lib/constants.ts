@@ -62,7 +62,7 @@ export const experiences = [
         role: "SDE Intern",
         company: "Faym – India's Largest Influencer Earnings App",
         location: "India (Remote)",
-        period: "2025 – Present",
+        period: "July 2026 – Present",
         highlights: [
             "Engineered and optimized high-throughput backend systems handling data-intensive workloads at the scale of 7.5M+ live users",
             "Designed efficient pipelines for querying and processing 200M+ MongoDB documents with high performance",

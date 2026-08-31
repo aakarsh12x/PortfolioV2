@@ -10,7 +10,7 @@ export const EXPERIENCE = [
         company: "Faym",
         url: "https://faym.co",
         location: "India",
-        period: "2025 – Present",
+        period: "July 2026 – Present",
         current: true,
         description: "Engineered high-throughput backend pipelines for 7.5M+ live users, querying 200M+ MongoDB documents. Drove backend optimizations with Python, Node.js, and Next.js, achieving up to 4× faster load times.",
         metrics: [
