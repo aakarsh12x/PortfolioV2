@@ -41,11 +41,6 @@ export const Hero = () => {
         <section ref={sectionRef} id="home" className="hero-stage" aria-labelledby="hero-title" onMouseMove={movePortrait} onMouseLeave={resetPortrait}>
             <div className="hero-stage__wash" aria-hidden="true" />
             <div className="hero-shell">
-                <motion.div className="hero-meta" initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
-                    <p className="hero-availability"><span aria-hidden="true" />Open to SDE roles</p>
-                    <p className="hero-coordinate">Full-Stack &amp; AI Engineer / India / 2026</p>
-                </motion.div>
-
                 <div className="hero-composition">
                     <motion.figure className="hero-portrait"
                         initial={reduceMotion ? false : { opacity: 0 }}
@@ -71,7 +66,7 @@ export const Hero = () => {
                     </h1>
 
                     <motion.div className="hero-intro" initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.75, ease: EASE }}>
-                        <p>Full-stack &amp; AI engineer turning raw ideas into fast, resilient software — from the first commit to the first <strong>25,000 users.</strong></p>
+                        <p>Full-stack and AI engineer building resilient software and high-scale backends powering over <strong>7.5 million active users</strong>.</p>
                         <div className="hero-actions">
                             <Magnetic><a href="#experience" className="hero-action hero-action--primary">Selected experience <ArrowDownRight aria-hidden="true" /></a></Magnetic>
                             <Magnetic><a href="#contact" className="hero-action hero-action--text">Discuss a role <ArrowUpRight aria-hidden="true" /></a></Magnetic>
@@ -79,12 +74,6 @@ export const Hero = () => {
                     </motion.div>
                 </div>
 
-                <motion.div className="hero-proof" initial={reduceMotion ? false : { opacity: 0, scaleX: 0.92 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ duration: 0.8, delay: 0.95, ease: EASE }}>
-                    <p><strong>Founding engineer</strong><span>Cherry Dating</span></p>
-                    <p><strong>25k+ users</strong><span>across shipped products</span></p>
-                    <p><strong>800+ problems</strong><span>solved with intent</span></p>
-                    <a href="#projects">Selected work <ArrowDownRight aria-hidden="true" /></a>
-                </motion.div>
             </div>
         </section>
     );

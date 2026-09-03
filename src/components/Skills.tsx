@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { SKILLS } from "@/data/portfolio";
+import { Shuffle } from "./ui/Shuffle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +75,20 @@ export const Skills = () => {
                             </div>
                             <ul>
                                 {group.items.map((item) => (
-                                    <li key={item}>{item}</li>
+                                    <li key={item}>
+                                        <Shuffle
+                                            text={item}
+                                            tag="span"
+                                            className="skill-shuffle"
+                                            shuffleDirection="right"
+                                            duration={0.35}
+                                            shuffleTimes={1}
+                                            triggerOnHover={true}
+                                            scrambleCharset="!@#$%01"
+                                            rootMargin="0px"
+                                            threshold={0.05}
+                                        />
+                                    </li>
                                 ))}
                             </ul>
                         </article>

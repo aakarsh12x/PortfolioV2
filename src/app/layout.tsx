@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Syne } from "next/font/google";
+import { Space_Grotesk, Syne, Press_Start_2P } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -17,6 +17,12 @@ const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const pressStart2P = Press_Start_2P({
+  variable: "--font-press-start",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -105,11 +111,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${spaceGrotesk.variable} ${syne.variable} antialiased lg:cursor-none`}>
+      <body className={`${spaceGrotesk.variable} ${syne.variable} ${pressStart2P.variable} antialiased lg:cursor-none`}>
         <ThemeProvider>
           <CustomCursor />
           <ScrollProgress />
-          <div className="noise" />
           <SpotlightGrid />
           <JsonLd />
           {children}

@@ -107,15 +107,23 @@ export const SKILLS = [
     },
     {
         category: "Frameworks",
-        items: ["React", "React Native", "Next.js", "Node.js", "Express", "Socket.IO"]
+        items: ["React", "React Native", "Next.js", "Node.js", "Express.js", "Socket.IO", "Tailwind CSS"]
     },
     {
-        category: "Data & Cloud",
-        items: ["PostgreSQL", "MongoDB", "Redis", "PostGIS", "AWS (EC2, RDS, S3, Lambda)", "Docker", "GitHub Actions", "Kubernetes"]
+        category: "Databases",
+        items: ["PostgreSQL", "MongoDB", "Redis", "Amazon RDS"]
+    },
+    {
+        category: "Cloud & DevOps",
+        items: ["AWS (EC2, RDS, S3)", "Docker", "Kubernetes", "Git", "GitHub Actions", "CI/CD"]
+    },
+    {
+        category: "AI",
+        items: ["AI Agents", "Retrieval-Augmented Generation (RAG)", "LLM APIs (OpenAI, Gemini, NVIDIA NIM)"]
     },
     {
         category: "Practices",
-        items: ["REST APIs", "WebSockets", "Distributed Systems", "Microservices", "CI/CD", "Linux", "Agile", "Unit & Integration Testing"]
+        items: ["REST APIs", "WebSockets", "Distributed Systems", "Microservices", "Linux", "Agile", "Unit & Integration Testing"]
     }
 ];
 

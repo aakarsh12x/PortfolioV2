@@ -50,38 +50,6 @@ export const Projects = () => {
                     },
                 });
             });
-
-            // Magnetic overlay pill animation on hover
-            const visuals = gsap.utils.toArray<HTMLElement>(".work-project__visual");
-            visuals.forEach((visual) => {
-                const pill = visual.querySelector<HTMLElement>(".work-project__overlay-pill");
-                if (!pill) return;
-
-                const onMouseMove = (e: MouseEvent) => {
-                    const rect = visual.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-
-                    gsap.to(pill, {
-                        x: x * 0.35,
-                        y: y * 0.35,
-                        duration: 0.35,
-                        ease: "power2.out",
-                    });
-                };
-
-                const onMouseLeave = () => {
-                    gsap.to(pill, {
-                        x: 0,
-                        y: 0,
-                        duration: 0.65,
-                        ease: "elastic.out(1.1, 0.6)",
-                    });
-                };
-
-                visual.addEventListener("mousemove", onMouseMove);
-                visual.addEventListener("mouseleave", onMouseLeave);
-            });
         },
         { scope: sectionRef, dependencies: [reduceMotion] }
     );
