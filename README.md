@@ -60,7 +60,6 @@ A modern, responsive portfolio website showcasing my skills, projects, and achie
 
 ### 📞 Contact
 - **Email**: [singhaakarsh28@gmail.com](mailto:singhaakarsh28@gmail.com) (Click to copy)
-- **WhatsApp**: [+91-8739018155](https://wa.me/918739018155)
 - **GitHub**: [@aakarsh12x](https://github.com/aakarsh12x)
 - **LinkedIn**: [Aakarsh Singh](https://www.linkedin.com/in/aakarsh-singh-b27a5228b/)
 
@@ -107,7 +106,6 @@ Feel free to reach out for collaboration opportunities, project discussions, or 
 - 💼 **LinkedIn**: [Aakarsh Singh](https://www.linkedin.com/in/aakarsh-singh-b27a5228b/)
 - 🐱 **GitHub**: [@aakarsh12x](https://github.com/aakarsh12x)
 - 📧 **Email**: singhaakarsh28@gmail.com
-- 📱 **WhatsApp**: +91-8739018155
 
 ---
 

@@ -97,14 +97,6 @@ export const Contact = () => {
                         >
                             Email Me <ArrowUpRight aria-hidden="true" />
                         </a>
-                        <a
-                            href="https://wa.me/918739018155"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="contact-btn contact-btn--secondary"
-                        >
-                            WhatsApp / Call <ArrowUpRight aria-hidden="true" />
-                        </a>
                     </div>
                 </div>
                 <nav className="contact-links" aria-label="Social links">

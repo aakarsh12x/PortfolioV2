@@ -13,6 +13,11 @@ export const EXPERIENCE = [
         period: "July 2026 – Present",
         current: true,
         description: "Engineered high-throughput backend pipelines for 7.5M+ live users, querying 200M+ MongoDB documents. Drove backend optimizations with Python, Node.js, and Next.js, achieving up to 4× faster load times.",
+        points: [
+            "Engineered high-throughput backend pipelines for 7.5M+ live users, querying 200M+ MongoDB documents.",
+            "Drove backend optimizations with Python, Node.js, and Next.js, achieving up to 4× faster load times.",
+            "Architected scalable data ingestion services ensuring high availability and sub-second query performance."
+        ],
         metrics: [
             { value: "7.5M+", label: "Live Users" },
             { value: "4x", label: "Loading Speedup" },
@@ -28,13 +33,19 @@ export const EXPERIENCE = [
         location: "Lucknow, India",
         period: "Jan 2026 – Present",
         current: true,
-        description: "Architected mobile backend for 10k+ MAU with sub-200ms latency across 60k+ daily geospatial matches. Implemented an ELO recommendation engine (+35% matches) and reduced AWS costs by 60%.",
+        description: "Built and launched a consumer-facing dating platform from scratch, scaling from 0 to 10,000+ users in 2 months with zero downtime post-launch while architecting a full-stack backend handling 250,000+ daily requests.",
+        points: [
+            "Built and launched a consumer-facing dating platform from scratch, scaling from 0 to 10,000+ users in 2 months with zero downtime post-launch.",
+            "Owned the end-to-end full-stack architecture using Node.js, Next.js, React Native, MongoDB, Redis, and AWS across both frontend and backend systems.",
+            "Engineered a backend handling 250,000+ daily requests with sub-200ms response times under concurrent load.",
+            "Led product and technical decisions by translating user behavior into scalable features that improved engagement and platform growth."
+        ],
         metrics: [
             { value: "10k+", label: "Monthly Active Users" },
-            { value: "+35%", label: "Matches per User" },
-            { value: "-60%", label: "AWS Bills" },
+            { value: "250k+", label: "Daily Requests" },
+            { value: "<200ms", label: "Response Latency" },
         ],
-        tech: ["React Native", "Node.js", "MongoDB", "Express", "Axios", "Tailwind", "Framer Motion"],
+        tech: ["React Native", "Next.js", "Node.js", "MongoDB", "Redis", "AWS", "Express"],
     },
     {
         id: 3,
@@ -44,13 +55,18 @@ export const EXPERIENCE = [
         location: "Noida, India",
         period: "Oct – Dec 2025",
         current: false,
-        description: "Engineered scalable real-time WebSocket chat system supporting 5,000+ concurrent users. Built 20+ REST APIs reducing response times by 30% and improved Core Web Vitals to cut load times by 25%.",
+        description: "Built and shipped end-to-end features for alumns.com using React, Node.js, and MongoDB, designing high-concurrency REST APIs and WebSocket real-time systems.",
+        points: [
+            "Built and shipped end-to-end features for alumns.com using React, Node.js, and MongoDB, delivering high-performance, responsive experiences.",
+            "Designed and optimized secure REST APIs for high-concurrency production workloads, improving system reliability and performance.",
+            "Built WebSocket-based real-time features for responsive live interactions at scale."
+        ],
         metrics: [
             { value: "5k+", label: "Concurrent Chat Users" },
             { value: "-30%", label: "API Response Time" },
             { value: "-25%", label: "Page Load Time" },
         ],
-        tech: ["Node.js", "Socket.IO", "MongoDB", "React", "Redux", "AWS"],
+        tech: ["React", "Node.js", "MongoDB", "Socket.IO", "REST APIs", "AWS"],
     },
     {
         id: 4,
@@ -59,13 +75,18 @@ export const EXPERIENCE = [
         location: "Selangor, Malaysia",
         period: "Mar – Aug 2025",
         current: false,
-        description: "Shipped enterprise ERP system securing 15,000+ records with RBAC. Optimized AWS RDS PostgreSQL to reduce latency by 35% and automated serverless CI/CD pipelines with Lambda and GitHub Actions.",
+        description: "Solo-architected and built 'Péče', an end-to-end ERP school management system using Flutter, React, Node.js, and AWS with secure RBAC and cloud automation.",
+        points: [
+            "Solo-architected and built 'Péče', an end-to-end ERP school management system, engineering high-performance user interfaces using Flutter, React and Node.js.",
+            "Architected and deployed secure, robust backend APIs with Node.js, seamlessly integrating with AWS infrastructure to ensure high system reliability and continuous uptime.",
+            "Owned the complete development lifecycle for critical system modules from bridging frontend/backend requirements to cloud deployment and performance tuning."
+        ],
         metrics: [
             { value: "15k+", label: "Secured Records" },
             { value: "-35%", label: "API Latency" },
             { value: "-30%", label: "Deployment Cycles" },
         ],
-        tech: ["Flutter", "React", "Node.js", "PostgreSQL", "AWS Lambda", "API Gateway", "GitHub Actions"],
+        tech: ["Flutter", "React", "Node.js", "PostgreSQL", "AWS (RDS, Lambda)", "System Architecture"],
     },
 ];
 

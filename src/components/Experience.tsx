@@ -167,12 +167,20 @@ export const Experience = () => {
                                                     ScrollTrigger.refresh();
                                                 }}
                                             >
-                                                <p className="experience-role__desc">{job.description}</p>
+                                                {job.points && job.points.length > 0 ? (
+                                                    <ul className="experience-role__points">
+                                                        {job.points.map((point, i) => (
+                                                            <li key={i}>{point}</li>
+                                                        ))}
+                                                    </ul>
+                                                ) : (
+                                                    <p className="experience-role__desc">{job.description}</p>
+                                                )}
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
 
-                                    <ul aria-label={`Technologies used at ${job.company}`}>
+                                    <ul className="experience-role__tech" aria-label={`Technologies used at ${job.company}`}>
                                         {job.tech.map((technology) => (
                                             <li key={technology}>{technology}</li>
                                         ))}

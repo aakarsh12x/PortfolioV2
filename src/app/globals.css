@@ -1120,7 +1120,40 @@ html.light .hero-action--text:hover {
   line-height: 1.55;
   text-wrap: pretty;
 }
-.experience-role__brief ul {
+.experience-role__points {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.65rem !important;
+  margin: 0.4rem 0 0.85rem !important;
+  padding: 0 !important;
+  list-style: none !important;
+  max-width: 65ch;
+}
+.experience-role__points li {
+  position: relative !important;
+  padding-left: 1.25rem !important;
+  color: var(--text-dim) !important;
+  font-size: 0.84rem !important;
+  line-height: 1.55 !important;
+  text-wrap: pretty;
+}
+.experience-role__points li::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.55em !important;
+  width: 0.3rem !important;
+  height: 0.3rem !important;
+  background: var(--accent) !important;
+  border-radius: 1px !important;
+}
+.experience-role__point-prefix {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-right: 0.35rem;
+}
+.experience-role__tech,
+.experience-role__brief > ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.85rem;
@@ -1128,13 +1161,15 @@ html.light .hero-action--text:hover {
   padding: 0;
   list-style: none;
 }
-.experience-role__brief li {
+.experience-role__tech li,
+.experience-role__brief > ul li {
   position: relative;
   padding-left: 0.75rem;
   color: var(--text-muted);
   font-size: 0.7rem;
 }
-.experience-role__brief li::before {
+.experience-role__tech li::before,
+.experience-role__brief > ul li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1213,6 +1248,15 @@ html.light .hero-action--text:hover {
 }
 .experience-role.experience-role--current .experience-role__desc {
   color: rgba(9, 9, 9, 0.9) !important;
+}
+.experience-role.experience-role--current .experience-role__points li {
+  color: rgba(9, 9, 9, 0.92) !important;
+}
+.experience-role.experience-role--current .experience-role__points li::before {
+  background: #090909 !important;
+}
+.experience-role.experience-role--current .experience-role__point-prefix {
+  color: #090909 !important;
 }
 .experience-role.experience-role--current .experience-role__toggle {
   color: #090909 !important;
